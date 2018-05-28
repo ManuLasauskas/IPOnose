@@ -1,5 +1,11 @@
 package Persistencia;
 
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.Writer;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.sql.*;
 
 public class Agente {
@@ -7,27 +13,34 @@ public class Agente {
     protected static Agente mInstancia=null;
     //Conexion con la base de datos
     protected static Connection mBD;
-	//Identificador ODBC de la base de datos
-    private static String url="jdbc:ucanaccess://";
-    //Driven para conectar con bases de datos Microsoft Access 
-    private static String ruta="D:/Dropbox/IPO/Las ventanitas/src/Persistencia/bd.accdb";
-    private static String ruta1="C:/Users/josel/Dropbox/IPO/Las ventanitas/src/Persistencia/bd.accdb";
-    private static String ruta2 = "C:/Users/USUARIO/Dropbox/IPO/Las ventanitas/src/Persistencia/bd.accdb";
+    protected static java.io.File dbFile;
     
     //Constructor
-    public Agente(String ruta)throws Exception {
-    	conectar(ruta);
+    public Agente()throws Exception {
+    	conectar();
     }
+   
     
  
     //Metodo para realizar la conexion a la base de datos 
-    private void conectar(String ruta) throws Exception {
-         mBD=DriverManager.getConnection(url+ruta);
+    private void conectar() throws Exception {
+    	dbFile = java.io.File.createTempFile("tempdb", ".accdb");
+    	dbFile.deleteOnExit();
+    	java.nio.file.Files.copy(
+    			Agente.class.getResourceAsStream("/Resources/bd.accdb"), 
+    	        dbFile.toPath(), 
+    	        java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+    	String connStr = String.format(
+    	        "jdbc:ucanaccess://%s;immediatelyReleaseResources=true", 
+    	        dbFile.getAbsolutePath());
+         mBD=DriverManager.getConnection(connStr);
     }
 
     
     //Metodo para desconectar de la base de datos
     public void desconectar() throws Exception{
+    	Writer fw = new FileWriter(Agente.class.getResource("Resources/bd.accdb").toString());
+    	java.nio.file.Files.copy(dbFile.toPath(), Paths.get(Agente.class.getResource("/Resources/bd.accdb").toURI()),java.nio.file.StandardCopyOption.REPLACE_EXISTING);
     	mBD.close();
     }
 

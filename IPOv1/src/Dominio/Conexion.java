@@ -9,8 +9,8 @@ public class Conexion {
 	private GestorTareas gestor_tar;
 	private Agente agente;
 	
-	public Conexion(String ruta) throws Exception {
-		agente=new Agente(ruta);
+	public Conexion() throws Exception {
+		agente=new Agente();
 		gestor_tar=new GestorTareas(agente);
 		gestor_usr=new GestorUsuarios(agente);
 		gestor_pry=new GestorProyectos(agente,gestor_usr,gestor_tar);

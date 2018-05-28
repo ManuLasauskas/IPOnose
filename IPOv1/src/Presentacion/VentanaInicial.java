@@ -68,9 +68,7 @@ public class VentanaInicial {
 		initialize();
 		 try {
 			 //LA RUTA DE LA BASE DE DATOS AQUI
-			String ruta="D:/Dropbox/IPO/Las ventanitas/src/Persistencia/bd.accdb";
-			// String ruta = "C:/Users/USUARIO/Dropbox/IPO/Las ventanitas/src/Persistencia/bd.accdb";
-			con = new Conexion(ruta);
+			con = new Conexion();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -157,7 +155,7 @@ public class VentanaInicial {
 			{
 				lblLogo = new JLabel("");
 				lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-				lblLogo.setIcon(new ImageIcon(VentanaInicio.class.getResource("/resources/login.png")));
+				lblLogo.setIcon(new ImageIcon(VentanaInicial.class.getResource("/resources/login.png")));
 				lblLogo.setBounds(10, 28, 144, 141);
 				panel.add(lblLogo);
 			}
