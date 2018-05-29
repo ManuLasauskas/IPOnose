@@ -19,6 +19,12 @@ public class Agente {
     	conectar();
     }
     
+    private static Agente instancia;
+    public static Agente getInstance() {
+    	if (instancia==null) instancia=new Agente();
+    	return instancia;
+    }
+    
  
     //Metodo para realizar la conexion a la base de datos 
     private void conectar(){

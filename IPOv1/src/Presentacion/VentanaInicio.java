@@ -2,6 +2,8 @@ package Presentacion;
 
 import Resources.*;
 import Dominio.*;
+import Persistencia.Agente;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -15,6 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -28,7 +31,6 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 
 public class VentanaInicio {
-	private Conexion con;
 	private JFrame frmProjectwizardIpo;
 	private JPanel panel;
 	private JComboBox comboBox;
@@ -52,7 +54,6 @@ public class VentanaInicio {
 				try {
 					
 					VentanaInicio window = new VentanaInicio();
-					window.frmProjectwizardIpo.setVisible(true);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,13 +67,7 @@ public class VentanaInicio {
 	 */
 	public VentanaInicio() {
 		initialize();
-		 try {
-			con=new Conexion();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		frmProjectwizardIpo.setVisible(true);
 	}
 
 	/**
@@ -120,7 +115,7 @@ public class VentanaInicio {
 				MaskFormatter usuario;
 				try{
 					usuario=new MaskFormatter("########");
-					usuario.setPlaceholderCharacter('O');
+					usuario.setPlaceholderCharacter('#');
 				userField = new JFormattedTextField(usuario);
 				userField.setBounds(316, 78, 154, 20);
 				} catch (ParseException ex) {
@@ -172,9 +167,7 @@ public class VentanaInicio {
 		public void mouseClicked(MouseEvent e) {
 			frmProjectwizardIpo.setVisible(false);
 			try{
-				frmProjectwizardIpo.dispose();
-				VentanaRegistro registro=new VentanaRegistro(con, frmProjectwizardIpo);
-				registro.frmProjectwizardIpo.setVisible(true);
+				VentanaRegistro registro=new VentanaRegistro();
 			}catch (Exception ex) {
 				ex.printStackTrace();
 			}
@@ -194,9 +187,11 @@ public class VentanaInicio {
 		private Border acierto = BorderFactory.createLineBorder(Color.GREEN);
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			
+			Agente st = Agente.getInstance();
 			String user=userField.getText();
-			if (con.loggin(user, passwordField.getPassword())==null) {
+			Usuario true_user=null;
+			true_user=loggin(st.getUsuarios(),user, passwordField.getPassword());
+			if (true_user==null) {
 				userField.setBorder(fallo);
 				passwordField.setBorder(fallo);
 				lblStatus.setText("ERROR DE AUTENTICACION");
@@ -204,12 +199,26 @@ public class VentanaInicio {
 				userField.setBorder(acierto);
 				lblStatus.setText("IDENTIFICACION CORRECTA");
 				passwordField.setBorder(acierto);
-				Usuario us = con.BuscarUsuario(userField.getText());
-				us.marcarlog();
+				true_user.marcarlog();
 				frmProjectwizardIpo.dispose();
-				VentanaProyectos window = new VentanaProyectos();				
+				VentanaProyectos window = new VentanaProyectos(true_user);				
 			}
 		}
+	}
+	public Usuario loggin(ArrayList<Usuario> users,String nombre,char[] contrasena) {
+		Usuario user=null;
+		for (int i=0;i<users.size();i++) {
+			if (String.valueOf(users.get(i).getUsuario()).equals(nombre)) user=users.get(i);
+		}
+		if(user!=null){
+			System.out.println("Usuario encontrado");
+			if (String.valueOf(contrasena).equals(user.getContrasena())) {
+				System.out.println("Iniciado correctamente");
+				return user;
+			}
+		} else System.out.println("Usuario no encontrado en la BBDD");
+		
+		return null;
 	}
 	private class PasswordFieldKeyListener extends KeyAdapter {
 		@Override

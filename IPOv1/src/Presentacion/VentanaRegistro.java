@@ -19,6 +19,8 @@ import javax.swing.text.MaskFormatter;
 import com.sun.jmx.snmp.Timestamp;
 
 import Dominio.*;
+import Persistencia.Agente;
+
 import javax.swing.JFormattedTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -36,7 +38,6 @@ import java.awt.event.ActionEvent;
 
 public class VentanaRegistro {
 	
-	private Conexion con;
 	public JFrame frmProjectwizardIpo;
 	public JFrame loginFrame;
 	private JPanel panel;
@@ -70,9 +71,7 @@ public class VentanaRegistro {
 	 * Create the application.
 	 * @throws Exception 
 	 */
-	public VentanaRegistro(Conexion con, JFrame loginFrame) throws Exception {
-		this.con=con;
-		this.loginFrame=loginFrame;
+	public VentanaRegistro() throws Exception {
 		initialize();
 	}
 
@@ -83,6 +82,7 @@ public class VentanaRegistro {
 		frmProjectwizardIpo = new JFrame();
 		frmProjectwizardIpo.setTitle("ProjectManager - IPO 2017");
 		frmProjectwizardIpo.setBounds(100, 100, 517, 452);
+		frmProjectwizardIpo.setVisible(true);
 		frmProjectwizardIpo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{173, 0, 0, 0, 0, 0, 0, 0};
@@ -358,10 +358,10 @@ public class VentanaRegistro {
 					SimpleDateFormat formato= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 					Date date = Calendar.getInstance().getTime();
 					String fecha = formato.format(date);
-
-					con.RegistrarUsuario(txtDNI.getText(), textField.getText(), String.valueOf(fldpass.getPassword()), textField_1.getText(), textField_2.getText(),fecha,textField_3.getText(),textField_4.getText());
+					Agente ag = Agente.getInstance();
+					ag.getUsuarios().add(new Usuario(txtDNI.getText(), textField.getText(), String.valueOf(fldpass.getPassword()), textField_1.getText(), textField_2.getText(),textField_3.getText(),textField_4.getText()));
 				frmProjectwizardIpo.dispose();
-				loginFrame.setVisible(true);
+				VentanaInicio vx=new VentanaInicio();
 			}
 			
 			
