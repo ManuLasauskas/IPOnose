@@ -19,7 +19,9 @@ public class GestorUsuarios {
 			return agente.BuscarUsuario(DNI);
 	}
 	
-	
+	public void marcarLog(usuario us) {
+		us.marcarlog();
+	}
 	
 	public boolean AnadirUsuario(usuario usr){
 		agente.insertUsuario(usr);

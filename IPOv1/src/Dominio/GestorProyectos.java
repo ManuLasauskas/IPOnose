@@ -1,7 +1,5 @@
 package Dominio;
 
-import java.sql.*;
-import java.util.*;
 import Persistencia.*;
 
 public class GestorProyectos {

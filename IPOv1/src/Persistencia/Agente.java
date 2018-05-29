@@ -17,6 +17,7 @@ public class Agente {
     public static Agente getInstance() {
 		if(mInstancia ==  null)
 			mInstancia = new Agente();
+			mInstancia.conectar();
 		return mInstancia;
 	}
     
@@ -24,7 +25,6 @@ public class Agente {
     public Agente() {
     	Usuarios=new ArrayList<usuario>();
     	Proyectos=new ArrayList<Proyecto>();
-    	conectar();
     }
     
  
