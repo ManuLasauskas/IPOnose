@@ -67,10 +67,7 @@ public class VentanaInicio {
 	public VentanaInicio() {
 		initialize();
 		 try {
-			 //LA RUTA DE LA BASE DE DATOS AQUI
-			String ruta="D:/Dropbox/IPO/Las ventanitas/src/Persistencia/bd.accdb";
-			// String ruta = "C:/Users/USUARIO/Dropbox/IPO/Las ventanitas/src/Persistencia/bd.accdb";
-			con = new Conexion(ruta);
+			con=new Conexion();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -207,22 +204,10 @@ public class VentanaInicio {
 				userField.setBorder(acierto);
 				lblStatus.setText("IDENTIFICACION CORRECTA");
 				passwordField.setBorder(acierto);
-				usuario us = con.BuscarUsuario(userField.getText());
+				Usuario us = con.BuscarUsuario(userField.getText());
 				us.marcarlog();
-				try {
-					con.marcarLog(us);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
 				frmProjectwizardIpo.dispose();
-				new VentanaProyectos();
-				System.exit(0);
-				
+				VentanaProyectos window = new VentanaProyectos();				
 			}
 		}
 	}

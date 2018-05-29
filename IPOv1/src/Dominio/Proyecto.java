@@ -4,23 +4,23 @@ import java.util.*;
 
 public class Proyecto {
 	private String nombre;
-	private usuario usuario;
+	private Usuario usuario;
 	private ArrayList<Tarea> tareas;
-	private ArrayList<usuario> asociados;
+	private ArrayList<Usuario> asociados;
 	
-	public Proyecto(String nombre, usuario usuario) {
+	public Proyecto(String nombre, Usuario usuario) {
 		this.nombre = nombre;
 		this.usuario=usuario;
 		this.tareas=new ArrayList<Tarea>();
-		this.asociados=new ArrayList<usuario>();
+		this.asociados=new ArrayList<Usuario>();
 		
 	}
 	
-	public Proyecto(String nombre, usuario usuario,ArrayList<Tarea> tareas) {
+	public Proyecto(String nombre, Usuario usuario,ArrayList<Tarea> tareas) {
 		this.nombre = nombre;
 		this.usuario=usuario;
 		this.tareas=tareas;
-		this.asociados=new ArrayList<usuario>();
+		this.asociados=new ArrayList<Usuario>();
 		
 	}
 
@@ -41,15 +41,15 @@ public class Proyecto {
 		this.tareas = tareas;
 	} 
 	
-	public usuario getUsuario(){
+	public Usuario getUsuario(){
 		return usuario;
 	}
 	
-	public void setUsuario(usuario usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario=usuario;
 	}
 	
-	public void setAsociados(ArrayList<usuario> asociados) {
+	public void setAsociados(ArrayList<Usuario> asociados) {
 		this.asociados=asociados;
 	}
 	
@@ -57,7 +57,7 @@ public class Proyecto {
 		tareas.add(tar);
 	}
 	
-	public void AnadirAsociado(usuario asociado) {
+	public void AnadirAsociado(Usuario asociado) {
 		asociados.add(asociado);
 	}
 	

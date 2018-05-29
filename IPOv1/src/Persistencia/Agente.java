@@ -7,24 +7,16 @@ import java.util.Date;
 import Dominio.*;
 
 public class Agente {
-	//instancia del agente
-    protected static Agente mInstancia=null;
-    
-    ArrayList<usuario> Usuarios;
+	//instancia del agente    
+    ArrayList<Usuario> Usuarios;
     
     ArrayList<Proyecto> Proyectos;
-
-    public static Agente getInstance() {
-		if(mInstancia ==  null)
-			mInstancia = new Agente();
-			mInstancia.conectar();
-		return mInstancia;
-	}
     
     //Constructor
     public Agente() {
-    	Usuarios=new ArrayList<usuario>();
+    	Usuarios=new ArrayList<Usuario>();
     	Proyectos=new ArrayList<Proyecto>();
+    	conectar();
     }
     
  
@@ -32,8 +24,8 @@ public class Agente {
     private void conectar(){
     	
     	/// Usuarios
-		usuario u1= new usuario("03924938B", "Programador", "1234", "joselu@joselu", "Ingeniero Tecnico", "Jose Luis","Mira Serrano");
-		usuario u2= new usuario("03974938F", "Lead Ingenier", "1234", "smoke@smoke", "Ingeniero Tecnico",  "Manuel","Garcia Diaz-Santos");
+		Usuario u1= new Usuario("03924938", "Programador", "1234", "joselu@joselu", "Ingeniero Tecnico", "Jose Luis","Mira Serrano");
+		Usuario u2= new Usuario("05715980", "Lead Ingenier", "1234", "smoke@smoke", "Ingeniero Tecnico",  "Manuel","Garcia Diaz-Santos");
 
 		Usuarios.add(u1);
 		Usuarios.add(u2);
@@ -56,11 +48,10 @@ public class Agente {
     public void desconectar(){
     	Usuarios=null;
     	Proyectos=null;
-    	mInstancia=null;
     }
 
     //Metodo para realizar una insercion en la base de datos
-    public int insertUsuario(usuario usuario){ 
+    public int insertUsuario(Usuario usuario){ 
     	Usuarios.add(usuario);
     	return 1;
     }
@@ -97,8 +88,8 @@ public class Agente {
     	return 0;
     }
     
-    public usuario BuscarUsuario(String DNI){
-		usuario user=null;
+    public Usuario BuscarUsuario(String DNI){
+		Usuario user=null;
 		for(int i=0;i<Usuarios.size();i++) {
 			user=Usuarios.get(i);
 			if(user.getUsuario().equals(DNI)) return user; 
@@ -115,7 +106,7 @@ public class Agente {
 		return null;
 	}
     
-	public ArrayList<usuario> getUsuarios(){
+	public ArrayList<Usuario> getUsuarios(){
 		return Usuarios;
 	}
 	

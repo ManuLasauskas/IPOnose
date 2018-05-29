@@ -10,7 +10,6 @@ public class Conexion {
 	
 	public Conexion(){
 		agente=new Agente();
-		agente=agente.getInstance();
 		gestor_usr=new GestorUsuarios(agente);
 		gestor_pry=new GestorProyectos(agente);
 		
@@ -25,7 +24,7 @@ public class Conexion {
 		return false;
 	}
 	
-	public boolean AnadirProyecto(usuario user,String nombre,String asociados) throws SQLException, Exception {
+	public boolean AnadirProyecto(Usuario user,String nombre,String asociados) throws SQLException, Exception {
 		if(gestor_pry.BuscarProyecto(nombre)==null) {
 			Proyecto prc=new Proyecto(nombre,user);
 			prc.AnadirAsociado(gestor_usr.BuscarUsuario(asociados));
@@ -37,27 +36,32 @@ public class Conexion {
 		return false;
 	}
 	
-	public usuario BuscarUsuario(String user){
+	public Usuario BuscarUsuario(String user){
 		if (gestor_usr.BuscarUsuario(user)!=null){
 			return gestor_usr.BuscarUsuario(user);
 		}else System.out.println("Usuario no encotrado");
 		return null;
 	}
-	public void marcarLog(usuario us){
+	public void marcarLog(Usuario us){
 		gestor_usr.marcarLog(us);
 	}
 	public boolean RegistrarUsuario(String DNI, String rol, String contrasena,String email, String descripcion,String fecha,String nombre, String apellido){
 		if(gestor_usr.BuscarUsuario(DNI)==null) {
-			return gestor_usr.AnadirUsuario(new usuario(DNI,rol,contrasena,email,descripcion,nombre,apellido));
+			return gestor_usr.AnadirUsuario(new Usuario(DNI,rol,contrasena,email,descripcion,nombre,apellido));
 		}
 		return false;
 	}
 	
-	public usuario loggin(String nombre,char[] contrasena) {
-		usuario user=gestor_usr.BuscarUsuario(nombre);
-		if((user!=null) && (String.valueOf(contrasena).equals(user.getContrasena()))) {
-			return user;
-		}
+	public Usuario loggin(String nombre,char[] contrasena) {
+		Usuario user=gestor_usr.BuscarUsuario(nombre);
+		if(user!=null){
+			System.out.println("Usuario encontrado");
+			if (String.valueOf(contrasena).equals(user.getContrasena())) {
+				System.out.println("Iniciado correctamente");
+				return user;
+			}
+		} else System.out.println("Usuario no encontrado en la BBDD");
+		
 		return null;
 	}
 	

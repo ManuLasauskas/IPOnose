@@ -355,19 +355,11 @@ public class VentanaRegistro {
 		
 		
 		public void actionPerformed(ActionEvent arg0) {
-				try {
 					SimpleDateFormat formato= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 					Date date = Calendar.getInstance().getTime();
 					String fecha = formato.format(date);
 
 					con.RegistrarUsuario(txtDNI.getText(), textField.getText(), String.valueOf(fldpass.getPassword()), textField_1.getText(), textField_2.getText(),fecha,textField_3.getText(),textField_4.getText());
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				frmProjectwizardIpo.dispose();
 				loginFrame.setVisible(true);
 			}

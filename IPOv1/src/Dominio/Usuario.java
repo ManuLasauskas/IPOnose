@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class usuario {
+public class Usuario {
 
 	private String usuario;
 	private String rol;
@@ -20,7 +20,7 @@ public class usuario {
 	private DateFormat fm= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	
-	public usuario(String usuario, String rol, String contrasena, String email, String descripcion, String nombre, String apellido) {
+	public Usuario(String usuario, String rol, String contrasena, String email, String descripcion, String nombre, String apellido) {
 		this.usuario = usuario;
 		this.rol = rol;
 		this.contrasena = contrasena;

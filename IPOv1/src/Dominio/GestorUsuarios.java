@@ -15,15 +15,15 @@ public class GestorUsuarios {
 	}
 	
 	
-	public usuario BuscarUsuario(String DNI){
+	public Usuario BuscarUsuario(String DNI){
 			return agente.BuscarUsuario(DNI);
 	}
 	
-	public void marcarLog(usuario us) {
+	public void marcarLog(Usuario us) {
 		us.marcarlog();
 	}
 	
-	public boolean AnadirUsuario(usuario usr){
+	public boolean AnadirUsuario(Usuario usr){
 		agente.insertUsuario(usr);
 		return true;
 	}
