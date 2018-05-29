@@ -4,15 +4,26 @@ import java.util.*;
 
 public class Proyecto {
 	private String nombre;
+	private Date fecha_creacion;
+	private Date fecha_fin;
 	private Usuario usuario;
 	private ArrayList<Tarea> tareas;
 	private ArrayList<Usuario> asociados;
+	private Estado estado;
+	private String descripcion;
 	
-	public Proyecto(String nombre, Usuario usuario) {
+	public Proyecto(String nombre, Usuario usuario, Date fecha_creacion, Date fecha_fin,Estado estado, String descripcion) {
 		this.nombre = nombre;
 		this.usuario=usuario;
 		this.tareas=new ArrayList<Tarea>();
 		this.asociados=new ArrayList<Usuario>();
+		this.asociados.add(usuario);
+		this.descripcion=descripcion;
+		this.fecha_creacion=fecha_creacion;
+		this.fecha_fin=fecha_fin;
+		this.estado=estado;
+		
+		
 		
 	}
 	
@@ -68,5 +79,29 @@ public class Proyecto {
 			if(tar.getNombre().equals(nombre)) return true;
 		}
 		return false;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion=descripcion;
+	}
+	public Date getFechaCreacion() {
+		return fecha_creacion;
+	}
+	public void setFechaCreacion(Date fecha_creacion) {
+		this.fecha_creacion=fecha_creacion;
+	}
+	public Date getFechaFin() {
+		return fecha_fin;
+	}
+	public void setFechaFin(Date fecha_fin) {
+		this.fecha_fin=fecha_fin;
+	}
+	public Estado getEstado() {
+		return estado;
+	}
+	public void setEstado(Estado estado) {
+		this.estado=estado;
 	}
 }
