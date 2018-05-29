@@ -3,26 +3,16 @@ package Dominio;
 import java.util.*;
 
 public class Tarea {
-	private String proyecto;
 	private String nombre;
 	private Date fecha_ini;
 	private Date fecha_fin;
 	private String prioridad;
 	
-	public Tarea(String proyecto, String nombre, Date fecha_ini, Date fecha_fin, String prioridad) {
-		this.proyecto = proyecto;
+	public Tarea( String nombre, Date fecha_ini, Date fecha_fin, String prioridad) {
 		this.nombre = nombre;
 		this.fecha_ini = fecha_ini;
 		this.fecha_fin = fecha_fin;
 		this.prioridad = prioridad;
-	}
-
-	public String getProyecto() {
-		return proyecto;
-	}
-
-	public void setProyecto(String proyecto) {
-		this.proyecto = proyecto;
 	}
 
 	public String getNombre() {

@@ -20,13 +20,13 @@ public class usuario {
 	private DateFormat fm= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	
-	public usuario(String usuario, String rol, String contrasena, String email, String descripcion, String ult_conex,String nombre, String apellido) {
+	public usuario(String usuario, String rol, String contrasena, String email, String descripcion, String nombre, String apellido) {
 		this.usuario = usuario;
 		this.rol = rol;
 		this.contrasena = contrasena;
 		this.email = email;
 		this.descripcion = descripcion;
-		this.ult_conex = conversionFecha(ult_conex);
+		marcarlog();
 		this.proyectos=new ArrayList<Proyecto>();
 		this.nombre=nombre;
 		this.apellido=apellido;
@@ -96,16 +96,7 @@ public class usuario {
 	public void AnadirProyecto(Proyecto proyecto) {
 		this.proyectos.add(proyecto);
 	}
-	private Date conversionFecha(String x){
-		Date fecha = null;
-		try {
-			 fecha =  fm.parse(x);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return fecha;
-	}
+	
 	public void marcarlog() {
 			ult_conex = Calendar.getInstance().getTime();
 	}

@@ -5,15 +5,9 @@ import java.util.*;
 import Persistencia.*;
 
 public class GestorTareas {
-	private ArrayList<Tarea> tareas;
 	private Agente agente;
-	public GestorTareas(Agente agente)throws Exception{
+	public GestorTareas(Agente agente){
 		this.agente=agente;
-		this.tareas=new ArrayList<Tarea>();
-		ResultSet rs=agente.select("SELECT * FROM tarea");
-		while(rs.next()) {
-			tareas.add(new Tarea(rs.getString(1),rs.getString(2),rs.getTime(3),rs.getTime(4),rs.getString(5)));
-		}
 	}
 	
 	public ArrayList<Tarea> ObtenerAsignacionAProyecto(String proyecto){

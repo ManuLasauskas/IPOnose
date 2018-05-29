@@ -6,13 +6,13 @@ public class Proyecto {
 	private String nombre;
 	private usuario usuario;
 	private ArrayList<Tarea> tareas;
-	private ArrayList<String> asociados;
+	private ArrayList<usuario> asociados;
 	
 	public Proyecto(String nombre, usuario usuario) {
 		this.nombre = nombre;
 		this.usuario=usuario;
 		this.tareas=new ArrayList<Tarea>();
-		this.asociados=new ArrayList<String>();
+		this.asociados=new ArrayList<usuario>();
 		
 	}
 	
@@ -20,7 +20,7 @@ public class Proyecto {
 		this.nombre = nombre;
 		this.usuario=usuario;
 		this.tareas=tareas;
-		this.asociados=new ArrayList<String>();
+		this.asociados=new ArrayList<usuario>();
 		
 	}
 
@@ -49,7 +49,7 @@ public class Proyecto {
 		this.usuario=usuario;
 	}
 	
-	public void setAsociados(ArrayList<String> asociados) {
+	public void setAsociados(ArrayList<usuario> asociados) {
 		this.asociados=asociados;
 	}
 	
@@ -57,7 +57,7 @@ public class Proyecto {
 		tareas.add(tar);
 	}
 	
-	public void AnadirAsociado(String asociado) {
+	public void AnadirAsociado(usuario asociado) {
 		asociados.add(asociado);
 	}
 	
