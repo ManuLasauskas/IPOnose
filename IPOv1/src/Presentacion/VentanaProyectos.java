@@ -51,6 +51,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class VentanaProyectos {
 
@@ -81,10 +83,10 @@ public class VentanaProyectos {
 		frmIproyect.setVisible(true);
 		frmIproyect.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{34, 52, 49, 62, 46, 52, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{8, 42, 71, 31, 35, 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{34, 91, 21, 21, 28, 46, 52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{8, 42, 63, 0, 36, 35, 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frmIproyect.getContentPane().setLayout(gridBagLayout);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
@@ -101,7 +103,7 @@ public class VentanaProyectos {
 		gbc_user_image.gridheight = 2;
 		gbc_user_image.insets = new Insets(0, 0, 5, 5);
 		gbc_user_image.fill = GridBagConstraints.BOTH;
-		gbc_user_image.gridx = 3;
+		gbc_user_image.gridx = 4;
 		gbc_user_image.gridy = 1;
 		frmIproyect.getContentPane().add(user_image, gbc_user_image);
 		
@@ -110,7 +112,7 @@ public class VentanaProyectos {
 		GridBagConstraints gbc_lblBienvenido = new GridBagConstraints();
 		gbc_lblBienvenido.anchor = GridBagConstraints.EAST;
 		gbc_lblBienvenido.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBienvenido.gridx = 4;
+		gbc_lblBienvenido.gridx = 5;
 		gbc_lblBienvenido.gridy = 1;
 		frmIproyect.getContentPane().add(lblBienvenido, gbc_lblBienvenido);
 		
@@ -120,7 +122,7 @@ public class VentanaProyectos {
 		GridBagConstraints gbc_lblX = new GridBagConstraints();
 		gbc_lblX.anchor = GridBagConstraints.WEST;
 		gbc_lblX.insets = new Insets(0, 0, 5, 5);
-		gbc_lblX.gridx = 5;
+		gbc_lblX.gridx = 6;
 		gbc_lblX.gridy = 1;
 		frmIproyect.getContentPane().add(lblX, gbc_lblX);
 		
@@ -128,7 +130,7 @@ public class VentanaProyectos {
 		GridBagConstraints gbc_lblUltimaConexion = new GridBagConstraints();
 		gbc_lblUltimaConexion.anchor = GridBagConstraints.WEST;
 		gbc_lblUltimaConexion.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUltimaConexion.gridx = 4;
+		gbc_lblUltimaConexion.gridx = 5;
 		gbc_lblUltimaConexion.gridy = 2;
 		frmIproyect.getContentPane().add(lblUltimaConexion, gbc_lblUltimaConexion);
 		
@@ -137,9 +139,9 @@ public class VentanaProyectos {
 		lblXUltimaConexion.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblXUltimaConexion = new GridBagConstraints();
 		gbc_lblXUltimaConexion.anchor = GridBagConstraints.WEST;
-		gbc_lblXUltimaConexion.gridwidth = 3;
+		gbc_lblXUltimaConexion.gridwidth = 2;
 		gbc_lblXUltimaConexion.insets = new Insets(0, 0, 5, 5);
-		gbc_lblXUltimaConexion.gridx = 5;
+		gbc_lblXUltimaConexion.gridx = 6;
 		gbc_lblXUltimaConexion.gridy = 2;
 		frmIproyect.getContentPane().add(lblXUltimaConexion, gbc_lblXUltimaConexion);
 		
@@ -148,17 +150,36 @@ public class VentanaProyectos {
 		gbc_lblMisProyectos.anchor = GridBagConstraints.SOUTH;
 		gbc_lblMisProyectos.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMisProyectos.gridx = 1;
-		gbc_lblMisProyectos.gridy = 3;
+		gbc_lblMisProyectos.gridy = 4;
 		frmIproyect.getContentPane().add(lblMisProyectos, gbc_lblMisProyectos);
+		
+		JLabel lblPlus = new JLabel("");
+		lblPlus.setIcon(new ImageIcon(VentanaProyectos.class.getResource("/Resources/plus.png")));
+		
+		GridBagConstraints gbc_lblPlus = new GridBagConstraints();
+		gbc_lblPlus.anchor = GridBagConstraints.SOUTH;
+		gbc_lblPlus.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPlus.gridx = 3;
+		gbc_lblPlus.gridy = 4;
+		frmIproyect.getContentPane().add(lblPlus, gbc_lblPlus);
+		
+		JLabel lblEdit = new JLabel("");
+		lblEdit.setIcon(new ImageIcon(VentanaProyectos.class.getResource("/Resources/editar.png")));
+		GridBagConstraints gbc_lblEdit = new GridBagConstraints();
+		gbc_lblEdit.anchor = GridBagConstraints.SOUTH;
+		gbc_lblEdit.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEdit.gridx = 4;
+		gbc_lblEdit.gridy = 4;
+		frmIproyect.getContentPane().add(lblEdit, gbc_lblEdit);
 		
 		JTabbedPane display_tab = new JTabbedPane(JTabbedPane.TOP);
 		GridBagConstraints gbc_display_tab = new GridBagConstraints();
 		gbc_display_tab.insets = new Insets(0, 0, 0, 5);
 		gbc_display_tab.gridheight = 14;
-		gbc_display_tab.gridwidth = 11;
+		gbc_display_tab.gridwidth = 10;
 		gbc_display_tab.fill = GridBagConstraints.BOTH;
-		gbc_display_tab.gridx = 4;
-		gbc_display_tab.gridy = 3;
+		gbc_display_tab.gridx = 5;
+		gbc_display_tab.gridy = 4;
 		frmIproyect.getContentPane().add(display_tab, gbc_display_tab);
 		
 		
@@ -179,11 +200,11 @@ public class VentanaProyectos {
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridheight = 13;
-		gbc_scrollPane.gridwidth = 3;
+		gbc_scrollPane.gridwidth = 4;
 		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 4;
+		gbc_scrollPane.gridy = 5;
 		frmIproyect.getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		DefaultListModel<String> proyects = new DefaultListModel<>();

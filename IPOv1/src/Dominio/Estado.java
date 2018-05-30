@@ -5,6 +5,5 @@ public enum Estado {
 
 	COMPLETADA,
 	ACTIVA,
-	TARDÍA,
-	PENDIENTE;
+	TARDÍA;
 }
