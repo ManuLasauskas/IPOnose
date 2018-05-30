@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+import com.sun.prism.Image;
 
 import Dominio.Proyecto;
 import Dominio.Usuario;
@@ -25,11 +26,14 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -72,7 +76,7 @@ public class VentanaProyectos {
 		frmIproyect.setTitle("IPROyect");
 		frmIproyect.setResizable(false);
 		Dimension rectangulo = Toolkit.getDefaultToolkit().getScreenSize();
-		frmIproyect.setBounds(0,0, rectangulo.width-50, rectangulo.height-50);
+		frmIproyect.setBounds(0,0, rectangulo.width-100, rectangulo.height-100);
 		frmIproyect.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frmIproyect.setVisible(true);
 		frmIproyect.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -147,6 +151,14 @@ public class VentanaProyectos {
 		gbc_lblMisProyectos.gridy = 3;
 		frmIproyect.getContentPane().add(lblMisProyectos, gbc_lblMisProyectos);
 		
+		JButton button = new JButton("");
+		button.setIcon(new ImageIcon(VentanaProyectos.class.getResource("/Resources/add.png")));
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.insets = new Insets(0, 0, 5, 5);
+		gbc_button.gridx = 2;
+		gbc_button.gridy = 3;
+		frmIproyect.getContentPane().add(button, gbc_button);
+		
 		JTabbedPane display_tab = new JTabbedPane(JTabbedPane.TOP);
 		GridBagConstraints gbc_display_tab = new GridBagConstraints();
 		gbc_display_tab.insets = new Insets(0, 0, 0, 5);
@@ -176,7 +188,7 @@ public class VentanaProyectos {
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridheight = 13;
 		gbc_scrollPane.gridwidth = 3;
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 1;
 		gbc_scrollPane.gridy = 4;
@@ -205,4 +217,11 @@ public class VentanaProyectos {
 		
 		
 	}
+	private ImageIcon resizeIcon(ImageIcon icon) {
+		java.awt.Image image = icon.getImage(); // transform it 
+		java.awt.Image newimg = image.getScaledInstance(20,20, java.awt.Image.SCALE_SMOOTH);// scale it the smooth way  
+		ImageIcon imageIcon = new ImageIcon(newimg);  // transform it back
+		return imageIcon;
+		}
+
 }

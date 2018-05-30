@@ -18,6 +18,7 @@ import java.awt.EventQueue;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+import java.awt.Font;
 
 public class InfoProyecto extends JPanel {
 	private GridBagLayout gridBagLayout;
@@ -38,19 +39,6 @@ public class InfoProyecto extends JPanel {
 	private JScrollPane scrollPane;
 	private JTable table;
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InfoProyecto frame = new InfoProyecto();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	/**
 	 * Create the panel.
 	 */
@@ -70,7 +58,8 @@ public class InfoProyecto extends JPanel {
 		gbc_lblNombre.gridy = 1;
 		add(lblNombre, gbc_lblNombre);
 		
-		lblProyecto = new JLabel("Nombre_proyecto");
+		lblProyecto = new JLabel("");
+		lblProyecto.setFont(new Font("Calibri", Font.BOLD, 12));
 		lblProyecto.setBackground(Color.WHITE);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -94,7 +83,8 @@ public class InfoProyecto extends JPanel {
 		gbc_lblFechaCreacion.gridy = 2;
 		add(lblFechaCreacion, gbc_lblFechaCreacion);
 		
-		lblFechacreado = new JLabel("Fecha_creado");
+		lblFechacreado = new JLabel("");
+		lblFechacreado.setFont(new Font("Calibri", Font.BOLD, 12));
 		GridBagConstraints gbc_lblFechacreado = new GridBagConstraints();
 		gbc_lblFechacreado.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFechacreado.gridx = 2;
@@ -151,7 +141,8 @@ public class InfoProyecto extends JPanel {
 		gbc_lblFechaDeFinalizacin.gridy = 3;
 		add(lblFechaDeFinalizacion, gbc_lblFechaDeFinalizacin);
 		
-		lblFechafin = new JLabel("Fecha_fin");
+		lblFechafin = new JLabel("");
+		lblFechafin.setFont(new Font("Calibri", Font.BOLD, 12));
 		GridBagConstraints gbc_lblFechafin = new GridBagConstraints();
 		gbc_lblFechafin.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFechafin.gridx = 2;
@@ -181,7 +172,8 @@ public class InfoProyecto extends JPanel {
 		gbc_lblCreador.gridy = 5;
 		add(lblCreador, gbc_lblCreador);
 		
-		lblNombrecreador = new JLabel("Nombre_creador");
+		lblNombrecreador = new JLabel("");
+		lblNombrecreador.setFont(new Font("Calibri", Font.BOLD, 12));
 		GridBagConstraints gbc_lblNombrecreador = new GridBagConstraints();
 		gbc_lblNombrecreador.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNombrecreador.gridx = 2;
