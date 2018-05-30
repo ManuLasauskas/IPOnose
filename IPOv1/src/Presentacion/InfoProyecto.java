@@ -10,17 +10,20 @@ import javax.swing.JTextArea;
 
 import Dominio.Estado;
 import Dominio.Proyecto;
-
+import Persistencia.Agente;
 import javax.swing.JTable;
 import java.awt.Color;
+import java.awt.EventQueue;
+
 import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class InfoProyecto extends JPanel {
-	private JTable table;
 	private GridBagLayout gridBagLayout;
 	private JLabel lblNombre;
-	private JLabel lblNewLabel;
-	private JLabel lblListaDeUsuarios;
+	private JLabel lblProyecto;
+	private JLabel lblUsuariosAsignados;
 	private JLabel lblFechaCreacion;
 	private JLabel lblFechacreado;
 	private JLabel lblFechaDeFinalizacion;
@@ -31,17 +34,32 @@ public class InfoProyecto extends JPanel {
 	private JLabel lblNombrecreador;
 	private JLabel lblDescripcion;
 	private JTextArea textArea;
+	private Agente ag = Agente.getInstance();
+	private JScrollPane scrollPane;
+	private JTable table;
 	
-	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					InfoProyecto frame = new InfoProyecto();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
 	/**
 	 * Create the panel.
 	 */
 	public InfoProyecto() {
 		gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 105, 139, 211, 0, 0, 157, 0};
-		gridBagLayout.rowHeights = new int[]{0, 28, 29, 31, 25, 25, 22, 175, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[]{0, 105, 139, 105, 0, 110, 108, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 42, 29, 43, 37, 38, 34, 114, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		lblNombre = new JLabel("Nombre");
@@ -52,20 +70,21 @@ public class InfoProyecto extends JPanel {
 		gbc_lblNombre.gridy = 1;
 		add(lblNombre, gbc_lblNombre);
 		
-		lblNewLabel = new JLabel("Nombre_proyecto");
-		lblNewLabel.setBackground(Color.WHITE);
+		lblProyecto = new JLabel("Nombre_proyecto");
+		lblProyecto.setBackground(Color.WHITE);
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 2;
 		gbc_lblNewLabel.gridy = 1;
-		add(lblNewLabel, gbc_lblNewLabel);
+		add(lblProyecto, gbc_lblNewLabel);
 		
-		lblListaDeUsuarios = new JLabel("Lista de usuarios");
-		GridBagConstraints gbc_lblListaDeUsuarios = new GridBagConstraints();
-		gbc_lblListaDeUsuarios.insets = new Insets(0, 0, 5, 0);
-		gbc_lblListaDeUsuarios.gridx = 6;
-		gbc_lblListaDeUsuarios.gridy = 1;
-		add(lblListaDeUsuarios, gbc_lblListaDeUsuarios);
+		lblUsuariosAsignados = new JLabel("Usuarios asignados");
+		GridBagConstraints gbc_lblUsuariosAsignados = new GridBagConstraints();
+		gbc_lblUsuariosAsignados.gridwidth = 3;
+		gbc_lblUsuariosAsignados.insets = new Insets(0, 0, 5, 5);
+		gbc_lblUsuariosAsignados.gridx = 4;
+		gbc_lblUsuariosAsignados.gridy = 1;
+		add(lblUsuariosAsignados, gbc_lblUsuariosAsignados);
 		
 		lblFechaCreacion = new JLabel("Fecha de creación");
 		GridBagConstraints gbc_lblFechaCreacion = new GridBagConstraints();
@@ -82,14 +101,47 @@ public class InfoProyecto extends JPanel {
 		gbc_lblFechacreado.gridy = 2;
 		add(lblFechacreado, gbc_lblFechacreado);
 		
-		table = new JTable();
-		GridBagConstraints gbc_table = new GridBagConstraints();
-		gbc_table.gridheight = 5;
-		gbc_table.insets = new Insets(0, 0, 5, 0);
-		gbc_table.fill = GridBagConstraints.BOTH;
-		gbc_table.gridx = 6;
-		gbc_table.gridy = 2;
-		add(table, gbc_table);
+		scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridheight = 5;
+		gbc_scrollPane.gridwidth = 2;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 5;
+		gbc_scrollPane.gridy = 2;
+		add(scrollPane, gbc_scrollPane);
+		
+		DefaultTableModel modelo = new DefaultTableModel();
+		table = new JTable(modelo);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Usuario", "Asignado/No"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Object.class, Boolean.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				false, true
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
+		for (int i =0;i<ag.getUsuarios().size();i++) {
+			Object[] fila = new Object[2];
+			fila[0]=ag.getUsuarios().get(i).getUsuario();
+			fila[1]=false;
+			((DefaultTableModel) table.getModel()).addRow(fila);
+		}
+		scrollPane.setViewportView(table);
+		
+
 		
 		lblFechaDeFinalizacion = new JLabel("Fecha de finalización");
 		GridBagConstraints gbc_lblFechaDeFinalizacin = new GridBagConstraints();
@@ -115,9 +167,7 @@ public class InfoProyecto extends JPanel {
 		add(lblEstado, gbc_lblEstado);
 		
 		comboBox = new JComboBox(Estado.values());
-		comboBox.setEditable(true);
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.gridx = 2;
 		gbc_comboBox.gridy = 4;
@@ -149,7 +199,7 @@ public class InfoProyecto extends JPanel {
 		textArea = new JTextArea();
 		GridBagConstraints gbc_textArea = new GridBagConstraints();
 		gbc_textArea.gridwidth = 3;
-		gbc_textArea.insets = new Insets(0, 0, 0, 5);
+		gbc_textArea.insets = new Insets(0, 0, 5, 5);
 		gbc_textArea.fill = GridBagConstraints.BOTH;
 		gbc_textArea.gridx = 1;
 		gbc_textArea.gridy = 7;
@@ -160,9 +210,13 @@ public class InfoProyecto extends JPanel {
 		lblNombrecreador.setText(p.getUsuario().getNombre());
 		textArea.setText(p.getDescripcion());
 		comboBox.setSelectedItem(p.getEstado());
-		lblFechafin.setText(p.getFechaFin().toString());
-		lblFechacreado.setText(p.getFechaCreacion().toString());
-		lblNombre.setText(p.getNombre());
+		lblFechafin.setText(p.getFechaFinFormateada());
+		lblFechacreado.setText(p.getFechaCreacionFormateada());
+		lblProyecto.setText(p.getNombre());
+		for (int i =0;i<table.getRowCount();i++) {
+			for (int j =0;j<p.getAsociados().size();j++)
+				if (String.valueOf(table.getValueAt(i, 0)).equals(p.getAsociados().get(j).getUsuario())) table.setValueAt(true, i, 1);
+		}
 		
 		// RELLENAR TABLA DE USUARIO
 	}

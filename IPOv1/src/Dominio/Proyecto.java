@@ -1,5 +1,6 @@
 package Dominio;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Proyecto {
@@ -11,6 +12,7 @@ public class Proyecto {
 	private ArrayList<Usuario> asociados;
 	private Estado estado;
 	private String descripcion;
+	private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yy:HH:mm:ss");
 	
 	public Proyecto(String nombre, Usuario usuario, Date fecha_creacion, Date fecha_fin,Estado estado, String descripcion) {
 		this.nombre = nombre;
@@ -63,6 +65,9 @@ public class Proyecto {
 	public void setAsociados(ArrayList<Usuario> asociados) {
 		this.asociados=asociados;
 	}
+	public ArrayList<Usuario> getAsociados(){
+		return asociados;
+	}
 	
 	public void AnadirTarea(Tarea tar) {
 		tareas.add(tar);
@@ -103,5 +108,11 @@ public class Proyecto {
 	}
 	public void setEstado(Estado estado) {
 		this.estado=estado;
+	}
+	public String getFechaCreacionFormateada() {
+		return format.format(fecha_creacion);
+	}
+	public String getFechaFinFormateada() {
+		return format.format(fecha_fin);
 	}
 }

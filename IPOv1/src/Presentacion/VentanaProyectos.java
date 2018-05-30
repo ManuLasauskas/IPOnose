@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 
+import Dominio.Proyecto;
 import Dominio.Usuario;
 import Persistencia.Agente;
 
@@ -44,16 +45,21 @@ import javax.swing.ListSelectionModel;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class VentanaProyectos {
 
 	private JFrame frmIproyect;
 	private Usuario us;
+	private Agente ag = Agente.getInstance();
+
 	/**
 	 * Create the application.
 	 */
 	public VentanaProyectos (Usuario us) {
 		this.us=us;
+		System.out.println(this.us);
 		initialize();
 		
 	}
@@ -151,76 +157,12 @@ public class VentanaProyectos {
 		gbc_display_tab.gridy = 3;
 		frmIproyect.getContentPane().add(display_tab, gbc_display_tab);
 		
-		JPanel info_panel = new JPanel();
-		display_tab.addTab("Información", null, info_panel, null);
-		display_tab.setEnabledAt(0, true);
-		GridBagLayout gbl_info_panel = new GridBagLayout();
-		gbl_info_panel.columnWidths = new int[]{4, 70, 46, 162, 88, 0, 0, 0};
-		gbl_info_panel.rowHeights = new int[]{33, 35, 30, 35, 29, 29, 97, 98, 0, 0};
-		gbl_info_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_info_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		info_panel.setLayout(gbl_info_panel);
 		
-		JLabel lblProyectoNombre = new JLabel("Nombre del proyecto:");
-		GridBagConstraints gbc_lblProyectoNombre = new GridBagConstraints();
-		gbc_lblProyectoNombre.anchor = GridBagConstraints.EAST;
-		gbc_lblProyectoNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_lblProyectoNombre.gridx = 1;
-		gbc_lblProyectoNombre.gridy = 0;
-		info_panel.add(lblProyectoNombre, gbc_lblProyectoNombre);
-		
-		JLabel lblFechaCreacion = new JLabel("Fecha creacion:");
-		GridBagConstraints gbc_lblFechaCreacion = new GridBagConstraints();
-		gbc_lblFechaCreacion.anchor = GridBagConstraints.EAST;
-		gbc_lblFechaCreacion.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFechaCreacion.gridx = 1;
-		gbc_lblFechaCreacion.gridy = 1;
-		info_panel.add(lblFechaCreacion, gbc_lblFechaCreacion);
-		
-		JLabel lblCreador = new JLabel("Creador:");
-		GridBagConstraints gbc_lblCreador = new GridBagConstraints();
-		gbc_lblCreador.anchor = GridBagConstraints.EAST;
-		gbc_lblCreador.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCreador.gridx = 1;
-		gbc_lblCreador.gridy = 2;
-		info_panel.add(lblCreador, gbc_lblCreador);
-		
-		JLabel lblEstado = new JLabel("Estado:");
-		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
-		gbc_lblEstado.anchor = GridBagConstraints.EAST;
-		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEstado.gridx = 1;
-		gbc_lblEstado.gridy = 3;
-		info_panel.add(lblEstado, gbc_lblEstado);
-		
-		JLabel lblFechaEstimadaDe = new JLabel("Fecha estimada de fin:");
-		GridBagConstraints gbc_lblFechaEstimadaDe = new GridBagConstraints();
-		gbc_lblFechaEstimadaDe.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFechaEstimadaDe.gridx = 1;
-		gbc_lblFechaEstimadaDe.gridy = 4;
-		info_panel.add(lblFechaEstimadaDe, gbc_lblFechaEstimadaDe);
-		
-		JLabel lblDescripcin = new JLabel("Descripción:");
-		GridBagConstraints gbc_lblDescripcin = new GridBagConstraints();
-		gbc_lblDescripcin.anchor = GridBagConstraints.EAST;
-		gbc_lblDescripcin.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDescripcin.gridx = 1;
-		gbc_lblDescripcin.gridy = 5;
-		info_panel.add(lblDescripcin, gbc_lblDescripcin);
-		
-		JTextArea textArea = new JTextArea();
-		GridBagConstraints gbc_textArea = new GridBagConstraints();
-		gbc_textArea.gridheight = 2;
-		gbc_textArea.gridwidth = 5;
-		gbc_textArea.insets = new Insets(0, 0, 5, 5);
-		gbc_textArea.fill = GridBagConstraints.BOTH;
-		gbc_textArea.gridx = 2;
-		gbc_textArea.gridy = 6;
-		info_panel.add(textArea, gbc_textArea);
+		InfoProyecto panel = new InfoProyecto();
+		display_tab.addTab("Información", null, panel, null);
 		
 		JPanel tareas_panel = new JPanel();
 		display_tab.addTab("Tareas", null, tareas_panel, null);
-		display_tab.setEnabledAt(1, true);
 		
 		JPanel chat_panel = new JPanel();
 		display_tab.addTab("Chat", null, chat_panel, null);
@@ -232,24 +174,35 @@ public class VentanaProyectos {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.anchor = GridBagConstraints.NORTHWEST;
-		gbc_scrollPane.gridwidth = 3;
 		gbc_scrollPane.gridheight = 13;
-		gbc_scrollPane.insets = new Insets(0, 0, 0, 5);
+		gbc_scrollPane.gridwidth = 3;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 1;
 		gbc_scrollPane.gridy = 4;
 		frmIproyect.getContentPane().add(scrollPane, gbc_scrollPane);
-
+		
 		DefaultListModel<String> proyects = new DefaultListModel<>();
-		JList<String> list = new JList<>(proyects);
-		Agente st = Agente.getInstance();
-		for ( int i = 0; i < st.getProyectos().size(); i++ ){
-			if (st.getProyectos().get(i).getUsuario()==us) proyects.addElement(st.getProyectos().get(i).getNombre() );
+		JList list = new JList(proyects);
+		
+		list.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+					String p = proyects.get(list.getSelectedIndex());
+					Proyecto pr=null;
+					for (int j=0;j<ag.getProyectos().size();j++) {
+						if (String.valueOf(ag.getProyectos().get(j).getNombre()).equals(p)) pr=ag.getProyectos().get(j);
+					}
+					panel.fill(pr);
+				
+			}
+		});
+		for ( int i = 0; i < ag.getProyectos().size(); i++ ){
+			if (ag.getProyectos().get(i).getUsuario()==us) proyects.addElement(ag.getProyectos().get(i).getNombre() );
 		}
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setVisibleRowCount(25);
-		list.setMaximumSize(new Dimension(100, 100));
 		scrollPane.setViewportView(list);
+
+		
 		
 	}
 }
