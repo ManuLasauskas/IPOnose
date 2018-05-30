@@ -12,6 +12,8 @@ public class Agente {
     
     ArrayList<Proyecto> Proyectos;
     
+    ArrayList<String> ChatLog;
+    
     //Constructor
     public Agente() {
     	Usuarios=new ArrayList<Usuario>();
@@ -64,6 +66,14 @@ public class Agente {
     public void desconectar(){
     	Usuarios=null;
     	Proyectos=null;
+    }
+    
+    public ArrayList<String> GetHistorialMensajes(){
+    	return ChatLog;
+    }
+    
+    public void ActualizarHistorialMensajes(String Mensaje) {
+    	ChatLog.add(Mensaje);
     }
 
     //Metodo para realizar una insercion en la base de datos
