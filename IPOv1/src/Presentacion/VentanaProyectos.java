@@ -81,7 +81,7 @@ public class VentanaProyectos {
 		frmIproyect.setVisible(true);
 		frmIproyect.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{34, 52, 47, 62, 46, 52, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWidths = new int[]{34, 52, 49, 62, 46, 52, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{8, 42, 71, 31, 35, 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
@@ -150,14 +150,6 @@ public class VentanaProyectos {
 		gbc_lblMisProyectos.gridx = 1;
 		gbc_lblMisProyectos.gridy = 3;
 		frmIproyect.getContentPane().add(lblMisProyectos, gbc_lblMisProyectos);
-		
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(VentanaProyectos.class.getResource("/Resources/add.png")));
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.insets = new Insets(0, 0, 5, 5);
-		gbc_button.gridx = 2;
-		gbc_button.gridy = 3;
-		frmIproyect.getContentPane().add(button, gbc_button);
 		
 		JTabbedPane display_tab = new JTabbedPane(JTabbedPane.TOP);
 		GridBagConstraints gbc_display_tab = new GridBagConstraints();
