@@ -40,6 +40,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class VentanaRegistro {
 	
@@ -53,17 +54,16 @@ public class VentanaRegistro {
 	private JLabel lblConfirmarContrasea;
 	private JPasswordField fldpassConfirm;
 	private JLabel lblRol;
-	private JTextField textField;
+	private JTextField txtRol;
 	private JLabel lblEmail;
-	private JTextField textField_1;
+	private JTextField txtemail;
 	private JLabel lblDescripcion;
-	private JTextField textField_2;
+	private JTextField txtDescripcion;
 	private JLabel lblNombre;
-	private JTextField textField_3;
+	private JTextField txtNombre;
 	private JLabel lblApellidos;
-	private JTextField textField_4;
+	private JTextField txtApellido;
 	private JButton btnNewButton;
-	private JLabel lblNewLabel_1;
 	private JLabel lblCaracteresMinimo;
 	private JButton btnSalir;
 	private JButton btnSeleccionarImagen;
@@ -88,8 +88,14 @@ public class VentanaRegistro {
 	private void initialize() {
 		ImageSelected="";
 		frmProjectwizardIpo = new JFrame();
+<<<<<<< HEAD
 		frmProjectwizardIpo.setTitle("ProjectManager - IPO 2017");
 		frmProjectwizardIpo.setBounds(100, 100, 537, 502);
+=======
+		frmProjectwizardIpo.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaRegistro.class.getResource("/Resources/logg.png")));
+		frmProjectwizardIpo.setTitle("IPROject");
+		frmProjectwizardIpo.setBounds(100, 100, 517, 452);
+>>>>>>> b08d9a4fb1b8ed4780a1c828015356309d0c7b04
 		frmProjectwizardIpo.setVisible(true);
 		frmProjectwizardIpo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -115,7 +121,7 @@ public class VentanaRegistro {
 			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			{
-				lblDNI = new JLabel("DNI*");
+				lblDNI = new JLabel("DNI");
 				GridBagConstraints gbc_lblDNI = new GridBagConstraints();
 				gbc_lblDNI.anchor = GridBagConstraints.EAST;
 				gbc_lblDNI.insets = new Insets(0, 0, 5, 5);
@@ -145,7 +151,7 @@ public class VentanaRegistro {
 				
 			}
 			{
-				lblContrasea = new JLabel("Contraseña*");
+				lblContrasea = new JLabel("Contraseña");
 				GridBagConstraints gbc_lblContrasea = new GridBagConstraints();
 				gbc_lblContrasea.gridwidth = 2;
 				gbc_lblContrasea.anchor = GridBagConstraints.EAST;
@@ -177,7 +183,7 @@ public class VentanaRegistro {
 				panel.add(lblCaracteresMinimo, gbc_lblCaracteresMinimo);
 			}
 			{
-				lblConfirmarContrasea = new JLabel("Confirmar contraseña*");
+				lblConfirmarContrasea = new JLabel("Confirmar contraseña");
 				GridBagConstraints gbc_lblConfirmarContrasea = new GridBagConstraints();
 				gbc_lblConfirmarContrasea.gridwidth = 2;
 				gbc_lblConfirmarContrasea.anchor = GridBagConstraints.EAST;
@@ -207,15 +213,21 @@ public class VentanaRegistro {
 				panel.add(lblRol, gbc_lblRol);
 			}
 			{
-				textField = new JTextField();
-				GridBagConstraints gbc_textField = new GridBagConstraints();
-				gbc_textField.gridwidth = 2;
-				gbc_textField.insets = new Insets(0, 0, 5, 5);
-				gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-				gbc_textField.gridx = 1;
-				gbc_textField.gridy = 3;
-				panel.add(textField, gbc_textField);
-				textField.setColumns(10);
+				txtRol = new JTextField();
+				txtRol.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyReleased(KeyEvent arg0) {
+						checkFilledFields();
+					}
+				});
+				GridBagConstraints gbc_txtRol = new GridBagConstraints();
+				gbc_txtRol.gridwidth = 2;
+				gbc_txtRol.insets = new Insets(0, 0, 5, 5);
+				gbc_txtRol.fill = GridBagConstraints.HORIZONTAL;
+				gbc_txtRol.gridx = 1;
+				gbc_txtRol.gridy = 3;
+				panel.add(txtRol, gbc_txtRol);
+				txtRol.setColumns(10);
 			}
 			{
 				lblEmail = new JLabel("E-mail");
@@ -227,15 +239,21 @@ public class VentanaRegistro {
 				panel.add(lblEmail, gbc_lblEmail);
 			}
 			{
-				textField_1 = new JTextField();
-				GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-				gbc_textField_1.gridwidth = 4;
-				gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-				gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-				gbc_textField_1.gridx = 1;
-				gbc_textField_1.gridy = 4;
-				panel.add(textField_1, gbc_textField_1);
-				textField_1.setColumns(10);
+				txtemail = new JTextField();
+				txtemail.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyReleased(KeyEvent e) {
+						checkFilledFields();
+					}
+				});
+				GridBagConstraints gbc_txtemail = new GridBagConstraints();
+				gbc_txtemail.gridwidth = 4;
+				gbc_txtemail.insets = new Insets(0, 0, 5, 5);
+				gbc_txtemail.fill = GridBagConstraints.HORIZONTAL;
+				gbc_txtemail.gridx = 1;
+				gbc_txtemail.gridy = 4;
+				panel.add(txtemail, gbc_txtemail);
+				txtemail.setColumns(10);
 			}
 			{
 				lblNombre = new JLabel("Nombre");
@@ -247,15 +265,21 @@ public class VentanaRegistro {
 				panel.add(lblNombre, gbc_lblNombre);
 			}
 			{
-				textField_3 = new JTextField();
-				GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-				gbc_textField_3.gridwidth = 2;
-				gbc_textField_3.insets = new Insets(0, 0, 5, 5);
-				gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-				gbc_textField_3.gridx = 1;
-				gbc_textField_3.gridy = 5;
-				panel.add(textField_3, gbc_textField_3);
-				textField_3.setColumns(10);
+				txtNombre = new JTextField();
+				txtNombre.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyReleased(KeyEvent e) {
+						checkFilledFields();
+					}
+				});
+				GridBagConstraints gbc_txtNombre = new GridBagConstraints();
+				gbc_txtNombre.gridwidth = 2;
+				gbc_txtNombre.insets = new Insets(0, 0, 5, 5);
+				gbc_txtNombre.fill = GridBagConstraints.HORIZONTAL;
+				gbc_txtNombre.gridx = 1;
+				gbc_txtNombre.gridy = 5;
+				panel.add(txtNombre, gbc_txtNombre);
+				txtNombre.setColumns(10);
 			}
 			{
 				lblApellidos = new JLabel("Apellido");
@@ -267,15 +291,21 @@ public class VentanaRegistro {
 				panel.add(lblApellidos, gbc_lblApellidos);
 			}
 			{
-				textField_4 = new JTextField();
-				GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-				gbc_textField_4.gridwidth = 2;
-				gbc_textField_4.insets = new Insets(0, 0, 5, 5);
-				gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
-				gbc_textField_4.gridx = 1;
-				gbc_textField_4.gridy = 6;
-				panel.add(textField_4, gbc_textField_4);
-				textField_4.setColumns(10);
+				txtApellido = new JTextField();
+				txtApellido.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyReleased(KeyEvent e) {
+						checkFilledFields();
+					}
+				});
+				GridBagConstraints gbc_txtApellido = new GridBagConstraints();
+				gbc_txtApellido.gridwidth = 2;
+				gbc_txtApellido.insets = new Insets(0, 0, 5, 5);
+				gbc_txtApellido.fill = GridBagConstraints.HORIZONTAL;
+				gbc_txtApellido.gridx = 1;
+				gbc_txtApellido.gridy = 6;
+				panel.add(txtApellido, gbc_txtApellido);
+				txtApellido.setColumns(10);
 			}
 			{
 				btnSeleccionarImagen = new JButton("Seleccionar Imagen");
@@ -301,6 +331,7 @@ public class VentanaRegistro {
 				panel.add(lblDescripcion, gbc_lblDescripcion);
 			}
 			{
+<<<<<<< HEAD
 				textField_2 = new JTextField();
 				GridBagConstraints gbc_textField_2 = new GridBagConstraints();
 				gbc_textField_2.gridwidth = 6;
@@ -320,6 +351,23 @@ public class VentanaRegistro {
 				gbc_lblNewLabel_1.gridx = 0;
 				gbc_lblNewLabel_1.gridy = 10;
 				panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
+=======
+				txtDescripcion = new JTextField();
+				txtDescripcion.addKeyListener(new KeyAdapter() {
+					@Override
+					public void keyReleased(KeyEvent e) {
+						checkFilledFields();
+					}
+				});
+				GridBagConstraints gbc_txtDescripcion = new GridBagConstraints();
+				gbc_txtDescripcion.gridwidth = 6;
+				gbc_txtDescripcion.insets = new Insets(0, 0, 5, 5);
+				gbc_txtDescripcion.fill = GridBagConstraints.BOTH;
+				gbc_txtDescripcion.gridx = 1;
+				gbc_txtDescripcion.gridy = 8;
+				panel.add(txtDescripcion, gbc_txtDescripcion);
+				txtDescripcion.setColumns(10);
+>>>>>>> b08d9a4fb1b8ed4780a1c828015356309d0c7b04
 			}
 			{
 				btnSalir = new JButton("SALIR");
@@ -393,7 +441,11 @@ public class VentanaRegistro {
 					Date date = Calendar.getInstance().getTime();
 					String fecha = formato.format(date);
 					Agente ag = Agente.getInstance();
+<<<<<<< HEAD
 					ag.insertUsuario(new Usuario(txtDNI.getText(), textField.getText(), String.valueOf(fldpass.getPassword()), textField_1.getText(), textField_2.getText(),textField_3.getText(),textField_4.getText(),ImageSelected));
+=======
+					ag.insertUsuario(new Usuario(txtDNI.getText(), txtRol.getText(), String.valueOf(fldpass.getPassword()), txtemail.getText(), txtDescripcion.getText(),txtNombre.getText(),txtApellido.getText()));
+>>>>>>> b08d9a4fb1b8ed4780a1c828015356309d0c7b04
 				frmProjectwizardIpo.dispose();
 				VentanaInicio vx=new VentanaInicio();
 			}
@@ -404,7 +456,7 @@ public class VentanaRegistro {
 	private void checkFilledFields(){
 		boolean iguales = false;
 		iguales = (String.valueOf(fldpass.getPassword()).equals(String.valueOf(fldpassConfirm.getPassword())));
-		if ((txtDNI.getText().length() == 8) && (fldpass.getPassword().length >= 4) && (fldpassConfirm.getPassword().length >=4)  && (iguales)){
+		if ((txtDNI.getText().length() == 8) && (fldpass.getPassword().length >= 4) && (fldpassConfirm.getPassword().length >=4)  && (iguales) && (txtRol.getText().length() > 1) && (txtNombre.getText().length() > 1) && (txtemail.getText().length() > 3) && (txtApellido.getText().length() > 4) && (txtDescripcion.getText().length() > 1)){
 			btnNewButton.setEnabled(true);
 		} else btnNewButton.setEnabled(false);
 	}
