@@ -69,6 +69,7 @@ public class UserChat extends JPanel {
 		
 		textArea = new JTextArea();
 		scrollPane.setViewportView(textArea);
+		textArea.setEditable(false);
 		
 		textField = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
@@ -83,7 +84,8 @@ public class UserChat extends JPanel {
 		JButton btnEnviar = new JButton("Enviar");
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				EscribirTexto(textField.getText());
+				textField.setText("");
 			}
 		});
 		
@@ -110,8 +112,8 @@ public class UserChat extends JPanel {
 	public void EscribirTexto(String Mensaje) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		Mensaje=dateFormat.format(date)+user.getNombre()+" "+user.getApellido()+" :"+Mensaje;
-		user.ActualizarChat((Usuario) SelectorChat.getSelectedItem(), Mensaje);
+		Mensaje=dateFormat.format(date)+" "+user.getNombre()+" "+user.getApellido()+" :"+Mensaje+"\n";
+		user.ActualizarChat(ag.BuscarUsuario((String)SelectorChat.getSelectedItem()), Mensaje);
 		ag.BuscarUsuario((String) SelectorChat.getSelectedItem()).ActualizarChat(user, Mensaje);
 		textArea.append(Mensaje);
 	}
