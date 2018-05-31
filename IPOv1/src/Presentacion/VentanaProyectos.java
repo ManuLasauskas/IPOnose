@@ -61,7 +61,8 @@ public class VentanaProyectos {
 	private JFrame frmIproyect;
 	private Usuario us;
 	private Agente ag = Agente.getInstance();
-
+	private Proyecto SelectedProyect;
+	private JList list;
 	private DefaultListModel<String> proyectos;
 	private JPanel user_image;
 
@@ -215,8 +216,7 @@ public class VentanaProyectos {
 		
 		InfoProyecto panel = new InfoProyecto();
 		display_tab.addTab("Información", null, panel, null);
-		
-		PanelTareas tareas_panel = new PanelTareas();
+		PanelTareas tareas_panel = new PanelTareas(SelectedProyect);
 		tareas_panel.setEnabled(false);
 		display_tab.addTab("Tareas", null, tareas_panel, null);
 		
@@ -236,15 +236,20 @@ public class VentanaProyectos {
 		frmIproyect.getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		proyectos = new DefaultListModel<>();
-		JList list = new JList(proyectos);
+		list = new JList<String>(proyectos);
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 					String p = proyectos.get(list.getSelectedIndex());
 					Proyecto pr=null;
 					for (int j=0;j<ag.getProyectos().size();j++) {
-						if (String.valueOf(ag.getProyectos().get(j).getNombre()).equals(p)) pr=ag.getProyectos().get(j);
+						if (String.valueOf(ag.getProyectos().get(j).getNombre()).equals(p)) {
+							pr=ag.getProyectos().get(j);
+							break;
+						}
 					}
+					
+					SelectedProyect=pr;
 					panel.fill(pr);
 					System.out.println(list.getSelectedValue());
 					tareas_panel.setEnabled(true);

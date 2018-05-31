@@ -85,6 +85,19 @@ public class Proyecto {
 		}
 		return false;
 	}
+	
+	public Tarea BuscarTarea(String nombre) {
+		Tarea t=null;
+		for (int i=0;i<tareas.size();i++) {
+			if(tareas.get(i).getNombre().equals(nombre)) {
+				t=tareas.get(i);
+				break;
+			}
+		}
+		
+		return t;
+	}
+	
 	public String getDescripcion() {
 		return descripcion;
 	}

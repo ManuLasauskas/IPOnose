@@ -44,6 +44,9 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class PanelTareas extends JPanel {
 	private JPanel panel;
@@ -74,6 +77,7 @@ public class PanelTareas extends JPanel {
 	private JComboBox comboBox_1;
 	private DefaultListModel<String> tareas;
 	private Agente ag = Agente.getInstance();
+	private Proyecto pr;
 	private ArrayList<Tarea> tareas_proyecto;
 	private JButton button;
 	private JButton btnNewButton;
@@ -83,11 +87,12 @@ public class PanelTareas extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelTareas() {
+	public PanelTareas(Proyecto pr) {
+		this.pr=pr;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 85, 62, 103, 35, 377, 0};
+		gridBagLayout.columnWidths = new int[]{0, 85, 62, 103, 35, 487, 110, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 22, 22, 24, 26, 39, 90, 179, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -171,15 +176,15 @@ public class PanelTareas extends JPanel {
 		panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.gridheight = 8;
-		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 5;
 		gbc_panel_1.gridy = 1;
 		add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[]{70, 120, 119, 70, 67, 0, 62, 0};
-		gbl_panel_1.rowHeights = new int[]{0, 27, 33, 32, 36, 32, 69, 65, 37, 118, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowHeights = new int[]{0, 27, 33, 32, 36, 32, 69, 65, 37, 153, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
@@ -293,7 +298,6 @@ public class PanelTareas extends JPanel {
 		
 		rdbtnActiva = new JRadioButton("ACTIVA");
 		GridBagConstraints gbc_rdbtnActiva = new GridBagConstraints();
-		gbc_rdbtnActiva.anchor = GridBagConstraints.WEST;
 		gbc_rdbtnActiva.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnActiva.gridx = 3;
 		gbc_rdbtnActiva.gridy = 5;
@@ -394,6 +398,15 @@ public class PanelTareas extends JPanel {
 		add(button, gbc_button);
 		
 		btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(tasklist.getSelectedValue()!=null) {
+					Tarea t;
+					t=pr.BuscarTarea(tasklist.getSelectedValue());
+					//t.Update();
+				}
+			}
+		});
 		btnNewButton.setIcon(new ImageIcon(PanelTareas.class.getResource("/Resources/lapiz.png")));
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
