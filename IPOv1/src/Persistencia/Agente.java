@@ -130,14 +130,14 @@ public class Agente {
 		Usuarios.add(u2);
 	
 		
-		Proyecto p1=new Proyecto("Computacion Cuantica",u1,rep,rep2,Estado.COMPLETADA,"Este proyecto tiene como objetivo incorporar la compuntación a la fisica cuántica");
+		Proyecto p1=new Proyecto("Computacion Cuantica",u2,rep,rep2,Estado.COMPLETADA,"Este proyecto tiene como objetivo incorporar la compuntación a la fisica cuántica");
 		
 		end.set(2017,10,1,15,0,0);
-		p1.AnadirTarea(new Tarea("Prototipar modelo interaccion",init.getTime(),end.getTime(),Prioridad.MODERADA));
+		p1.AnadirTarea(new Tarea("Prototipar modelo interaccion",init.getTime(),end.getTime(),Prioridad.MODERADA,Estado.COMPLETADA, u2,"Construccion del prototipo del modelo para seguir los pasos"));
 		
 		init.set(2017,10,2,9,0,0);
 		end.set(2017,12,28,15,0,0);
-		p1.AnadirTarea(new Tarea("Integracion en dispositivos",init.getTime(),end.getTime(),Prioridad.MODERADA));
+		p1.AnadirTarea(new Tarea("Integracion en dispositivos",init.getTime(),end.getTime(),Prioridad.MODERADA, Estado.ACTIVA,u2,"Proceso de integrar el nuevo prototipo funcional dentro de dispositivos portatiles"));
 		
 		init.set(2018, 4,3,13,30,0);
 		end.set(2020, 11,13,16,45,0);
@@ -147,15 +147,15 @@ public class Agente {
 		
 		init.set(2018,11,2,9,0,0);
 		end.set(2018,12,28,14,0,0);
-		p2.AnadirTarea(new Tarea("Encontrar al ladron",init.getTime(),end.getTime(),Prioridad.BAJA));
+		p2.AnadirTarea(new Tarea("Encontrar al ladron",init.getTime(),end.getTime(),Prioridad.BAJA, Estado.TARDÍA,u1,"Rastrear todas las pistas que el ladrón ha dejado"));
 		
 		init.set(2018,6,2,9,0,0);
 		end.set(2018,9,28,14,0,0);
-		p2.AnadirTarea(new Tarea("Diseño nuevo firewall",init.getTime(),end.getTime(),Prioridad.MODERADA));
+		p2.AnadirTarea(new Tarea("Diseño nuevo firewall",init.getTime(),end.getTime(),Prioridad.MODERADA, Estado.ACTIVA,u1,"Construcción del nuevo firewall especializado en ladrones de diamantes"));
 		
 		init.set(2018,9,2,9,0,0);
 		end.set(2018,11,28,14,0,0);
-		p2.AnadirTarea(new Tarea("Revision modelo de comunicacion",init.getTime(),end.getTime(),Prioridad.MODERADA));
+		p2.AnadirTarea(new Tarea("Revision modelo de comunicacion",init.getTime(),end.getTime(),Prioridad.ALTA, Estado.COMPLETADA,u2,"No hay más que hablar señoria"));
 		
 		Proyectos.add(p1);
 		Proyectos.add(p2);

@@ -12,7 +12,7 @@ public class Proyecto {
 	private ArrayList<Usuario> asociados;
 	private Estado estado;
 	private String descripcion;
-	private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yy:HH:mm:ss");
+	private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
 	
 	public Proyecto(String nombre, Usuario usuario, Date fecha_creacion, Date fecha_fin,Estado estado, String descripcion) {
 		this.nombre = nombre;
