@@ -76,6 +76,7 @@ public class VentanaProyectos {
 	 */
 	private void initialize() {
 		frmIproyect = new JFrame();
+		frmIproyect.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaProyectos.class.getResource("/Resources/iproject.png")));
 		frmIproyect.setTitle("IPROyect");
 		frmIproyect.setResizable(false);
 		Dimension rectangulo = Toolkit.getDefaultToolkit().getScreenSize();

@@ -29,6 +29,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Font;
 import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 
 public class VentanaInicio {
 	private JFrame frmProjectwizardIpo;
@@ -76,6 +77,7 @@ public class VentanaInicio {
 	
 	private void initialize() {
 		frmProjectwizardIpo = new JFrame();
+		frmProjectwizardIpo.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaInicio.class.getResource("/Resources/logg.png")));
 		frmProjectwizardIpo.setTitle("ProjectWizard  - IPO 2017");
 		frmProjectwizardIpo.setBounds(100, 100, 511, 310);
 		frmProjectwizardIpo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -149,7 +151,7 @@ public class VentanaInicio {
 			{
 				lblLogo = new JLabel("");
 				lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-				lblLogo.setIcon(new ImageIcon(VentanaInicio.class.getResource("/resources/login.png")));
+				lblLogo.setIcon(new ImageIcon(VentanaInicio.class.getResource("/Resources/logg.png")));
 				lblLogo.setBounds(10, 28, 144, 141);
 				panel.add(lblLogo);
 			}
