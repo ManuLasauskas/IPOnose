@@ -6,13 +6,13 @@ public class Tarea {
 	private String nombre;
 	private Date fecha_ini;
 	private Date fecha_fin;
-	private String prioridad;
+	private Prioridad prioridad;
 	
-	public Tarea( String nombre, Date fecha_ini, Date fecha_fin, String prioridad) {
+	public Tarea( String nombre, Date fecha_ini, Date fecha_fin, Prioridad p) {
 		this.nombre = nombre;
 		this.fecha_ini = fecha_ini;
 		this.fecha_fin = fecha_fin;
-		this.prioridad = prioridad;
+		this.prioridad = p;
 	}
 
 	public String getNombre() {
@@ -39,11 +39,11 @@ public class Tarea {
 		this.fecha_fin = fecha_fin;
 	}
 
-	public String getPrioridad() {
+	public Prioridad getPrioridad() {
 		return prioridad;
 	}
 
-	public void setPrioridad(String prioridad) {
+	public void setPrioridad(Prioridad prioridad) {
 		this.prioridad = prioridad;
 	}
 }

@@ -359,7 +359,7 @@ public class VentanaRegistro {
 					Date date = Calendar.getInstance().getTime();
 					String fecha = formato.format(date);
 					Agente ag = Agente.getInstance();
-					ag.getUsuarios().add(new Usuario(txtDNI.getText(), textField.getText(), String.valueOf(fldpass.getPassword()), textField_1.getText(), textField_2.getText(),textField_3.getText(),textField_4.getText()));
+					ag.insertUsuario(new Usuario(txtDNI.getText(), textField.getText(), String.valueOf(fldpass.getPassword()), textField_1.getText(), textField_2.getText(),textField_3.getText(),textField_4.getText()));
 				frmProjectwizardIpo.dispose();
 				VentanaInicio vx=new VentanaInicio();
 			}
