@@ -100,7 +100,12 @@ public class VentanaProyectos {
 		gbc_user_image.gridy = 1;
 		frmIproyect.getContentPane().add(user_image, gbc_user_image);
 		
-		JLabel lblBienvenido = new JLabel("Bienvenido:");
+		if(!us.getImage().equals("")) {
+			Imagen im = new Imagen(us.getImage(),user_image);
+        user_image.add(im).repaint();
+		}
+		
+		JLabel lblBienvenido = new JLabel("Bienvenido: ");
 		lblBienvenido.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblBienvenido = new GridBagConstraints();
 		gbc_lblBienvenido.gridwidth = 2;
