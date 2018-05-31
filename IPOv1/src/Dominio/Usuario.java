@@ -31,6 +31,7 @@ public class Usuario {
 		this.proyectos=new ArrayList<Proyecto>();
 		this.nombre=nombre;
 		this.apellido=apellido;
+		this.RegistroChats=new ArrayList<RegistroChats>();
 	}	
 	public String getUsuario() {
 		return usuario;
@@ -38,7 +39,7 @@ public class Usuario {
 	
 	public void InicializarRegistro(ArrayList<Usuario> usuarios) {
 		for(int i=0;i<usuarios.size();i++) {
-			if(!usuarios.get(i).getUsuario().equals(usuario)) {
+			if(!(usuarios.get(i).getUsuario().equals(usuario))) {
 				RegistroChats.add(new RegistroChats(usuarios.get(i)));
 			}
 		}
