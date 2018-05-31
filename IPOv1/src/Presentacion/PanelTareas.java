@@ -8,6 +8,7 @@ import java.awt.Insets;
 import javax.swing.JList;
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -16,6 +17,10 @@ import java.awt.Color;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeModel;
 
+import Dominio.EndDateComparator;
+import Dominio.Estado;
+import Dominio.InitDateComparator;
+import Dominio.Prioridad;
 import Dominio.Proyecto;
 import Dominio.Tarea;
 import Persistencia.Agente;
@@ -26,17 +31,26 @@ import javax.swing.JSlider;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 public class PanelTareas extends JPanel {
 	private JPanel panel;
 	private JScrollPane scrollPane;
 	private JLabel lblOrdenarPor;
-	private JComboBox sortComboBox;
-	private JList tasklist;
+	private JComboBox<String> sortComboBox;
+	private JList<String> tasklist;
 	private JPanel panel_1;
 	private JLabel lblNombreDeTarea;
 	private JLabel lblFechaDeComienzo;
@@ -49,7 +63,7 @@ public class PanelTareas extends JPanel {
 	private JRadioButton rdbtnTardia;
 	private JLabel lblPrioridad;
 	private JSlider slider;
-	private JTextArea textArea;
+	private JTextArea txtDescripcion;
 	private JLabel lblListaDeSubtareas;
 	private JList subtasklist;
 	private JLabel lblImagen;
@@ -61,6 +75,9 @@ public class PanelTareas extends JPanel {
 	private DefaultListModel<String> tareas;
 	private Agente ag = Agente.getInstance();
 	private ArrayList<Tarea> tareas_proyecto;
+	private JButton button;
+	private JButton btnNewButton;
+	private JButton btnborrar;
 	
 
 	/**
@@ -69,7 +86,7 @@ public class PanelTareas extends JPanel {
 	public PanelTareas() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 85, 62, 103, 35, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 38, 47, 39, 90, 179, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 22, 22, 24, 26, 39, 90, 179, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
@@ -99,7 +116,13 @@ public class PanelTareas extends JPanel {
 		gbc_lblOrdenarPor.gridy = 0;
 		panel.add(lblOrdenarPor, gbc_lblOrdenarPor);
 		
-		sortComboBox = new JComboBox();
+		sortComboBox = new JComboBox<String>();
+		sortComboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				ordenarLista(sortComboBox.getSelectedIndex());
+			}
+		});
+		sortComboBox.setModel(new DefaultComboBoxModel(new String[] {"Fecha de creacion", "Fecha de fin", "Nombre (A-Z)", "Responsable (A-Z)"}));
 		GridBagConstraints gbc_sortComboBox = new GridBagConstraints();
 		gbc_sortComboBox.insets = new Insets(0, 0, 5, 0);
 		gbc_sortComboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -116,7 +139,33 @@ public class PanelTareas extends JPanel {
 		panel.add(scrollPane, gbc_scrollPane);
 		
 		tareas = new DefaultListModel<>();
-		tasklist = new JList(tareas);
+		tasklist = new JList<String>(tareas);
+		tasklist.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				Tarea t = null;
+				if (tasklist.getSelectedValue() == null){
+					lblName.setText("");
+					lblInitDate.setText("");
+					lblEndDate.setText("");
+					txtDescripcion.setText("");
+				}else {
+				for (int i=0;i<tareas_proyecto.size();i++) {
+					if (String.valueOf(tasklist.getSelectedValue()).equals(tareas_proyecto.get(i).getNombre())) {
+						t=tareas_proyecto.get(i);
+						break;
+					}
+				}
+				lblName.setText(t.getNombre());
+				lblInitDate.setText(t.getFechaInicioString());
+				lblEndDate.setText(t.getFechaFinString());
+				comprobarPrioridad(t);
+				comprobarEstado(t);
+				comboBox_1.setSelectedItem(t.getResponsable().getNombre());
+				txtDescripcion.setText(t.getDescripcion());
+				
+				}
+			}
+		});
 		scrollPane.setViewportView(tasklist);
 		
 		panel_1 = new JPanel();
@@ -128,17 +177,16 @@ public class PanelTareas extends JPanel {
 		gbc_panel_1.gridy = 1;
 		add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{103, 151, 70, 67, 0};
-		gbl_panel_1.rowHeights = new int[]{0, 27, 33, 32, 36, 32, 69, 65, 37, 88, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.columnWidths = new int[]{121, 119, 70, 67, 0, 142, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 27, 33, 32, 36, 32, 69, 65, 37, 118, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
 		lblImagen = new JLabel("Imagen");
 		GridBagConstraints gbc_lblImagen = new GridBagConstraints();
-		gbc_lblImagen.gridwidth = 2;
 		gbc_lblImagen.insets = new Insets(0, 0, 5, 0);
-		gbc_lblImagen.gridx = 2;
+		gbc_lblImagen.gridx = 5;
 		gbc_lblImagen.gridy = 0;
 		panel_1.add(lblImagen, gbc_lblImagen);
 		
@@ -152,18 +200,20 @@ public class PanelTareas extends JPanel {
 		
 		lblName = new JLabel("");
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
+		gbc_lblName.anchor = GridBagConstraints.WEST;
+		gbc_lblName.gridwidth = 3;
 		gbc_lblName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblName.gridx = 1;
 		gbc_lblName.gridy = 1;
 		panel_1.add(lblName, gbc_lblName);
 		
 		label = new JLabel("");
-		label.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
+		label.setBorder(null);
 		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.gridwidth = 2;
-		gbc_label.gridheight = 3;
+		gbc_label.anchor = GridBagConstraints.WEST;
+		gbc_label.gridheight = 5;
 		gbc_label.insets = new Insets(0, 0, 5, 0);
-		gbc_label.gridx = 2;
+		gbc_label.gridx = 5;
 		gbc_label.gridy = 1;
 		panel_1.add(label, gbc_label);
 		
@@ -177,6 +227,7 @@ public class PanelTareas extends JPanel {
 		
 		lblInitDate = new JLabel("");
 		GridBagConstraints gbc_lblInitDate = new GridBagConstraints();
+		gbc_lblInitDate.anchor = GridBagConstraints.WEST;
 		gbc_lblInitDate.insets = new Insets(0, 0, 5, 5);
 		gbc_lblInitDate.gridx = 1;
 		gbc_lblInitDate.gridy = 2;
@@ -192,6 +243,7 @@ public class PanelTareas extends JPanel {
 		
 		lblEndDate = new JLabel("");
 		GridBagConstraints gbc_lblEndDate = new GridBagConstraints();
+		gbc_lblEndDate.anchor = GridBagConstraints.WEST;
 		gbc_lblEndDate.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEndDate.gridx = 1;
 		gbc_lblEndDate.gridy = 3;
@@ -207,10 +259,14 @@ public class PanelTareas extends JPanel {
 		
 		comboBox_1 = new JComboBox();
 		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
+		gbc_comboBox_1.gridwidth = 2;
 		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_1.gridx = 1;
 		gbc_comboBox_1.gridy = 4;
+		for (int i=0;i<ag.getUsuarios().size();i++) {
+			comboBox_1.addItem(ag.getUsuarios().get(i).getNombre());
+		}
 		panel_1.add(comboBox_1, gbc_comboBox_1);
 		
 		lblEstado = new JLabel("Estado");
@@ -244,7 +300,7 @@ public class PanelTareas extends JPanel {
 		
 		rdbtnTardia = new JRadioButton("TARDIA");
 		GridBagConstraints gbc_rdbtnTardia = new GridBagConstraints();
-		gbc_rdbtnTardia.insets = new Insets(0, 0, 5, 0);
+		gbc_rdbtnTardia.insets = new Insets(0, 0, 5, 5);
 		gbc_rdbtnTardia.gridx = 3;
 		gbc_rdbtnTardia.gridy = 5;
 		panel_1.add(rdbtnTardia, gbc_rdbtnTardia);
@@ -277,7 +333,7 @@ public class PanelTareas extends JPanel {
 		slider.setValue(0);
 		slider.setMaximum(2);
 		GridBagConstraints gbc_slider = new GridBagConstraints();
-		gbc_slider.gridwidth = 2;
+		gbc_slider.gridwidth = 3;
 		gbc_slider.insets = new Insets(0, 0, 5, 5);
 		gbc_slider.gridx = 1;
 		gbc_slider.gridy = 6;
@@ -293,14 +349,15 @@ public class PanelTareas extends JPanel {
 		gbc_lblBreveDescripcin.gridy = 7;
 		panel_1.add(lblBreveDescripcin, gbc_lblBreveDescripcin);
 		
-		textArea = new JTextArea();
-		GridBagConstraints gbc_textArea = new GridBagConstraints();
-		gbc_textArea.insets = new Insets(0, 0, 5, 0);
-		gbc_textArea.gridwidth = 3;
-		gbc_textArea.fill = GridBagConstraints.BOTH;
-		gbc_textArea.gridx = 1;
-		gbc_textArea.gridy = 7;
-		panel_1.add(textArea, gbc_textArea);
+		txtDescripcion = new JTextArea();
+		txtDescripcion.setEditable(false);
+		GridBagConstraints gbc_txtDescripcion = new GridBagConstraints();
+		gbc_txtDescripcion.insets = new Insets(0, 0, 5, 5);
+		gbc_txtDescripcion.gridwidth = 3;
+		gbc_txtDescripcion.fill = GridBagConstraints.BOTH;
+		gbc_txtDescripcion.gridx = 1;
+		gbc_txtDescripcion.gridy = 7;
+		panel_1.add(txtDescripcion, gbc_txtDescripcion);
 		
 		lblListaDeSubtareas = new JLabel("Lista de subtareas");
 		GridBagConstraints gbc_lblListaDeSubtareas = new GridBagConstraints();
@@ -312,21 +369,130 @@ public class PanelTareas extends JPanel {
 		
 		subtasklist = new JList();
 		GridBagConstraints gbc_subtasklist = new GridBagConstraints();
+		gbc_subtasklist.insets = new Insets(0, 0, 0, 5);
 		gbc_subtasklist.gridwidth = 3;
 		gbc_subtasklist.fill = GridBagConstraints.BOTH;
 		gbc_subtasklist.gridx = 1;
 		gbc_subtasklist.gridy = 9;
 		panel_1.add(subtasklist, gbc_subtasklist);
+		
+		button = new JButton("");
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		button.setIcon(new ImageIcon(PanelTareas.class.getResource("/Resources/anadir.png")));
+		button.setBorder(BorderFactory.createEmptyBorder());
+
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.anchor = GridBagConstraints.WEST;
+		gbc_button.insets = new Insets(0, 0, 5, 5);
+		gbc_button.gridx = 4;
+		gbc_button.gridy = 3;
+		add(button, gbc_button);
+		
+		btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(PanelTareas.class.getResource("/Resources/lapiz.png")));
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		btnNewButton.setBorder(BorderFactory.createEmptyBorder());
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton.gridx = 4;
+		gbc_btnNewButton.gridy = 4;
+		add(btnNewButton, gbc_btnNewButton);
+		
+		btnborrar = new JButton("");
+		btnborrar.setIcon(new ImageIcon(PanelTareas.class.getResource("/Resources/papelera.png")));
+		btnborrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		btnborrar.setBorder(BorderFactory.createEmptyBorder());
+		GridBagConstraints gbc_btnborrar = new GridBagConstraints();
+		gbc_btnborrar.anchor = GridBagConstraints.WEST;
+		gbc_btnborrar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnborrar.gridx = 4;
+		gbc_btnborrar.gridy = 5;
+		add(btnborrar, gbc_btnborrar);
 
 	}
 	public void mostrarTareas(Proyecto p) {
 		tareas_proyecto=p.getTareas();
-		System.out.println(tareas_proyecto.size());
 		for (int i =0;i<tareas_proyecto.size();i++) {
 			tareas.addElement(tareas_proyecto.get(i).getNombre());
 		}
 	}
 	public void eliminarTareas() {
+		tasklist.clearSelection();
 		tareas.removeAllElements();
+	}
+	public void comprobarPrioridad(Tarea t) {
+		Prioridad estado = t.getPrioridad();
+		switch (estado){
+			case BAJA:
+				slider.setValue(0);
+				break;
+			case MODERADA:
+				slider.setValue(1);
+				break;
+			case ALTA:
+				slider.setValue(2);
+				break;
+		}
+	}
+	public void comprobarEstado(Tarea t) {
+		Estado estado = t.getEstado();
+		switch (estado) {
+		case COMPLETADA:
+			rdbtnCompletada.setSelected(true);
+			break;
+		case ACTIVA:
+			rdbtnActiva.setSelected(true);
+			break;
+		case TARDÍA:
+			rdbtnTardia.setSelected(true);
+			break;
+			}
+		}
+	public void ordenarLista(int tipo_orden) {
+		switch (tipo_orden){
+		case 0:
+		Collections.sort(tareas_proyecto, new InitDateComparator());
+		break;
+		case 1:
+		Collections.sort(tareas_proyecto,new EndDateComparator());
+		break;
+		case 2:
+		Collections.sort(tareas_proyecto, new Comparator<Tarea>() {
+            @Override
+            public int compare(Tarea c1, Tarea c2) {
+                return c1.getNombre().compareTo(c2.getNombre());
+            }
+        });
+		break;
+		case 3:
+			Collections.sort(tareas_proyecto, new Comparator<Tarea>() {
+	            @Override
+	            public int compare(Tarea c1, Tarea c2) {
+	                return c1.getResponsable().getNombre().compareTo(c2.getResponsable().getNombre());
+	            }
+	        });
+			break;
+		}
+		recargarLista();
+		
+	}
+	public void recargarLista() {
+		eliminarTareas();
+		for (int i=0;i<tareas_proyecto.size();i++) {
+			tareas.addElement(tareas_proyecto.get(i).getNombre());
+		}
 	}
 }
