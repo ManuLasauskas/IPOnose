@@ -2,23 +2,35 @@ package Presentacion;
 
 import javax.swing.JPanel;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
 
 public class Imagen extends JPanel {
 	int x, y;
-	ImageIcon Img;
+	String Route;
 
-    public Imagen(String Route,JPanel jPanel1) {
-    	Img = new ImageIcon(getClass().getResource(Route));
-        this.x = jPanel1.getWidth();
-        this.y = jPanel1.getHeight();
+    public Imagen(String Route) {
+    	this.Route=Route;
+    	x=100;
+    	y=100;
         this.setSize(x, y);
     }
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(Img.getImage(), 0, 0, x, y, null);
+ 
+    	try {
+    		
+    		ImageIcon Img = new ImageIcon(Route);
+    		Img = new ImageIcon(Img.getImage().getScaledInstance(x, y, Image.SCALE_DEFAULT));
+    		g.drawImage(Img.getImage(), 0, 0, x, y, null);
+    		
+    	}catch(Exception e) {
+    		
+    	}
+    	
     }    
-
 
 }

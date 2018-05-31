@@ -54,6 +54,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.FlowLayout;
 
 public class VentanaProyectos {
 
@@ -95,6 +96,7 @@ public class VentanaProyectos {
 		frmIproyect.getContentPane().setLayout(gridBagLayout);
 		
 		user_image = new JPanel();
+		user_image.setLayout(null);
 		GridBagConstraints gbc_user_image = new GridBagConstraints();
 		gbc_user_image.gridwidth = 2;
 		gbc_user_image.gridheight = 3;
@@ -105,8 +107,11 @@ public class VentanaProyectos {
 		frmIproyect.getContentPane().add(user_image, gbc_user_image);
 		
 		if(!us.getImage().equals("")){
-			Imagen im = new Imagen(us.getImage(),user_image);
-			user_image.add(im).repaint();
+			
+			Imagen im = new Imagen(us.getImage());
+			user_image.add(im);
+			user_image.repaint();
+			
 		}
 		
 		JLabel lblBienvenido = new JLabel("Bienvenido: ");

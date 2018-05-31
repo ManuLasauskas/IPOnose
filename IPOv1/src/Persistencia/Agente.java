@@ -45,6 +45,7 @@ public class Agente {
     //Metodo para realizar una insercion en la base de datos
     public int insertUsuario(Usuario usuario){ 
     	Usuarios.add(usuario);
+    	usuario.InicializarRegistro(Usuarios);
     	return 1;
     }
     
@@ -115,7 +116,7 @@ public class Agente {
 		Date rep = init.getTime();
 		Date rep2=end.getTime();
 		
-		Usuario u1= new Usuario("03924938", "Programador", "1234", "joselu@joselu", "Ingeniero Tecnico", "Jose Luis","Mira Serrano","");
+		Usuario u1= new Usuario("03924938", "Programador", "1234", "joselu@joselu", "Ingeniero Tecnico", "Jose Luis","Mira Serrano","C:\\Users\\josel\\Desktop\\IPOnose\\IPOv1\\src\\Resources\\user_group.png");
 		Usuario u2= new Usuario("05715980", "Lead Ingenier", "1234", "smoke@smoke", "Ingeniero Tecnico",  "Manuel","Garcia Diaz-Santos","");
 
 		Usuarios.add(u1);
