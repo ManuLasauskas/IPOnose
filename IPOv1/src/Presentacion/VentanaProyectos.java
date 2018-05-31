@@ -60,6 +60,7 @@ public class VentanaProyectos {
 	private JFrame frmIproyect;
 	private Usuario us;
 	private Agente ag = Agente.getInstance();
+	private JPanel user_image;
 
 	/**
 	 * Create the application.
@@ -91,7 +92,7 @@ public class VentanaProyectos {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frmIproyect.getContentPane().setLayout(gridBagLayout);
 		
-		JPanel user_image = new JPanel();
+		user_image = new JPanel();
 		GridBagConstraints gbc_user_image = new GridBagConstraints();
 		gbc_user_image.gridwidth = 2;
 		gbc_user_image.gridheight = 3;
@@ -101,9 +102,9 @@ public class VentanaProyectos {
 		gbc_user_image.gridy = 1;
 		frmIproyect.getContentPane().add(user_image, gbc_user_image);
 		
-		if(!us.getImage().equals("")) {
+		if(!us.getImage().equals("")){
 			Imagen im = new Imagen(us.getImage(),user_image);
-        user_image.add(im).repaint();
+			user_image.add(im).repaint();
 		}
 		
 		JLabel lblBienvenido = new JLabel("Bienvenido: ");

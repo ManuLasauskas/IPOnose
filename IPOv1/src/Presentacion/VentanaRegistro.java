@@ -88,14 +88,9 @@ public class VentanaRegistro {
 	private void initialize() {
 		ImageSelected="";
 		frmProjectwizardIpo = new JFrame();
-<<<<<<< HEAD
-		frmProjectwizardIpo.setTitle("ProjectManager - IPO 2017");
-		frmProjectwizardIpo.setBounds(100, 100, 537, 502);
-=======
 		frmProjectwizardIpo.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaRegistro.class.getResource("/Resources/logg.png")));
 		frmProjectwizardIpo.setTitle("IPROject");
 		frmProjectwizardIpo.setBounds(100, 100, 517, 452);
->>>>>>> b08d9a4fb1b8ed4780a1c828015356309d0c7b04
 		frmProjectwizardIpo.setVisible(true);
 		frmProjectwizardIpo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -331,27 +326,6 @@ public class VentanaRegistro {
 				panel.add(lblDescripcion, gbc_lblDescripcion);
 			}
 			{
-<<<<<<< HEAD
-				textField_2 = new JTextField();
-				GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-				gbc_textField_2.gridwidth = 6;
-				gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-				gbc_textField_2.fill = GridBagConstraints.BOTH;
-				gbc_textField_2.gridx = 1;
-				gbc_textField_2.gridy = 9;
-				panel.add(textField_2, gbc_textField_2);
-				textField_2.setColumns(10);
-			}
-			{
-				lblNewLabel_1 = new JLabel("*: Campos obligatorios para el registro");
-				lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-				GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-				gbc_lblNewLabel_1.gridwidth = 5;
-				gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNewLabel_1.gridx = 0;
-				gbc_lblNewLabel_1.gridy = 10;
-				panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
-=======
 				txtDescripcion = new JTextField();
 				txtDescripcion.addKeyListener(new KeyAdapter() {
 					@Override
@@ -367,7 +341,6 @@ public class VentanaRegistro {
 				gbc_txtDescripcion.gridy = 8;
 				panel.add(txtDescripcion, gbc_txtDescripcion);
 				txtDescripcion.setColumns(10);
->>>>>>> b08d9a4fb1b8ed4780a1c828015356309d0c7b04
 			}
 			{
 				btnSalir = new JButton("SALIR");
@@ -441,11 +414,9 @@ public class VentanaRegistro {
 					Date date = Calendar.getInstance().getTime();
 					String fecha = formato.format(date);
 					Agente ag = Agente.getInstance();
-<<<<<<< HEAD
-					ag.insertUsuario(new Usuario(txtDNI.getText(), textField.getText(), String.valueOf(fldpass.getPassword()), textField_1.getText(), textField_2.getText(),textField_3.getText(),textField_4.getText(),ImageSelected));
-=======
-					ag.insertUsuario(new Usuario(txtDNI.getText(), txtRol.getText(), String.valueOf(fldpass.getPassword()), txtemail.getText(), txtDescripcion.getText(),txtNombre.getText(),txtApellido.getText()));
->>>>>>> b08d9a4fb1b8ed4780a1c828015356309d0c7b04
+
+					ag.insertUsuario(new Usuario(txtDNI.getText(), txtRol.getText(), String.valueOf(fldpass.getPassword()), txtemail.getText(), txtDescripcion.getText(),txtNombre.getText(),txtApellido.getText(),ImageSelected));
+
 				frmProjectwizardIpo.dispose();
 				VentanaInicio vx=new VentanaInicio();
 			}
