@@ -90,7 +90,7 @@ public class VentanaRegistro {
 		frmProjectwizardIpo = new JFrame();
 		frmProjectwizardIpo.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaRegistro.class.getResource("/Resources/logg.png")));
 		frmProjectwizardIpo.setTitle("IPROject");
-		frmProjectwizardIpo.setBounds(100, 100, 517, 452);
+		frmProjectwizardIpo.setBounds(100, 100, 540, 504);
 		frmProjectwizardIpo.setVisible(true);
 		frmProjectwizardIpo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -334,6 +334,7 @@ public class VentanaRegistro {
 					}
 				});
 				GridBagConstraints gbc_txtDescripcion = new GridBagConstraints();
+				gbc_txtDescripcion.gridheight = 2;
 				gbc_txtDescripcion.gridwidth = 6;
 				gbc_txtDescripcion.insets = new Insets(0, 0, 5, 5);
 				gbc_txtDescripcion.fill = GridBagConstraints.BOTH;

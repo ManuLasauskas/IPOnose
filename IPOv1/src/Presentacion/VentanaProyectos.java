@@ -204,8 +204,9 @@ public class VentanaProyectos {
 		display_tab.addTab("Tareas", null, tareas_panel, null);
 		
 		JPanel chat_panel = new UserChat(us);
+		chat_panel.setEnabled(false);
 		display_tab.addTab("Chat", null, chat_panel, null);
-		chat_panel.setLayout(null);
+
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
