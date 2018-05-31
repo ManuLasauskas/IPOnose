@@ -47,7 +47,7 @@ public class Agente {
 		Usuarios.add(u2);
 	
 		
-		Proyecto p1=new Proyecto("Computacion Cuantica",u1,rep,rep2,Estado.COMPLETADA,"Este proyecto tiene como objetivo incorporar la compuntación a la fisica cuántica");
+		Proyecto p1=new Proyecto("Computacion Cuantica",u2,rep,rep2,Estado.COMPLETADA,"Este proyecto tiene como objetivo incorporar la compuntación a la fisica cuántica");
 		init.set(2018, 4,3,13,30,0);
 		end.set(2018, 11,13,16,45,0);
 		rep=init.getTime();
