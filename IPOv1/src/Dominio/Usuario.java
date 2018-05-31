@@ -16,6 +16,7 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private Date ult_conex;
+	private ArrayList<RegistroChats> RegistroChats;
 	private ArrayList<Proyecto> proyectos;
 	private DateFormat fm= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
@@ -34,6 +35,44 @@ public class Usuario {
 	public String getUsuario() {
 		return usuario;
 	}
+	
+	public void InicializarRegistro(ArrayList<Usuario> usuarios) {
+		for(int i=0;i<usuarios.size();i++) {
+			if(!usuarios.get(i).getUsuario().equals(usuario)) {
+				RegistroChats.add(new RegistroChats(usuarios.get(i)));
+			}
+		}
+	}
+	
+	public ArrayList<Usuario> getUsuariosParaChatear(){
+		ArrayList<Usuario> x=new ArrayList<Usuario>();
+		for(int i=0;i<RegistroChats.size();i++) {
+			x.add(RegistroChats.get(i).getUser());
+		}
+		
+		return x;
+	}
+	
+	public ArrayList<String> getUserChat(Usuario user){
+		ArrayList<String> ChatLog=null;
+		for(int i=0;i<RegistroChats.size();i++) {
+			if(RegistroChats.get(i).getUser().getUsuario().equals(user.getUsuario())) {
+				ChatLog=RegistroChats.get(i).getChat();
+				break;
+			}
+		}
+		return ChatLog;
+	}
+	
+	public void ActualizarChat(Usuario user,String Mensaje) {
+		for(int i=0;i<RegistroChats.size();i++) {
+			if(RegistroChats.get(i).getUser().getUsuario().equals(user.getUsuario())) {
+				RegistroChats.get(i).AnadirMensaje(Mensaje);
+				break;
+			}
+		}
+	}
+	
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
