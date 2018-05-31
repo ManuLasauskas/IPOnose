@@ -1,10 +1,4 @@
-<<<<<<< HEAD
 /Dominio/
-/Resources/
-/Presentacion/
-=======
-/Presentacion/
-/Resources/
 /Persistencia/
-/Dominio/
->>>>>>> branch 'master' of https://github.com/ManuLasauskas/IPOnose.git
+/Presentacion/
+/Resources/

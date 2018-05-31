@@ -60,6 +60,7 @@ public class VentanaProyectos {
 	private JFrame frmIproyect;
 	private Usuario us;
 	private Agente ag = Agente.getInstance();
+	private DefaultListModel<String> proyectos;
 
 	/**
 	 * Create the application.
@@ -76,7 +77,7 @@ public class VentanaProyectos {
 	 */
 	private void initialize() {
 		frmIproyect = new JFrame();
-		frmIproyect.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaProyectos.class.getResource("/Resources/iproject.png")));
+		frmIproyect.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaProyectos.class.getResource("/Resources/logg.png")));
 		frmIproyect.setTitle("IPROyect");
 		frmIproyect.setResizable(false);
 		Dimension rectangulo = Toolkit.getDefaultToolkit().getScreenSize();
@@ -151,6 +152,16 @@ public class VentanaProyectos {
 		frmIproyect.getContentPane().add(lblMisProyectos, gbc_lblMisProyectos);
 		
 		JButton btnadd = new JButton("");
+		btnadd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				VentanaEdicionProyecto vx = new VentanaEdicionProyecto(us);
+				vx.setAlwaysOnTop(true);
+				vx.setVisible(true);
+				while(vx.isDisplayable()) {}
+				refrescarLista();
+			}
+		});
 		btnadd.setIcon(new ImageIcon(VentanaProyectos.class.getResource("/Resources/Anadir.png")));
 		btnadd.setBorder(BorderFactory.createEmptyBorder());
 		GridBagConstraints gbc_btnadd = new GridBagConstraints();
@@ -211,12 +222,12 @@ public class VentanaProyectos {
 		gbc_scrollPane.gridy = 5;
 		frmIproyect.getContentPane().add(scrollPane, gbc_scrollPane);
 		
-		DefaultListModel<String> proyects = new DefaultListModel<>();
-		JList list = new JList(proyects);
+		proyectos = new DefaultListModel<>();
+		JList list = new JList(proyectos);
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-					String p = proyects.get(list.getSelectedIndex());
+					String p = proyectos.get(list.getSelectedIndex());
 					Proyecto pr=null;
 					for (int j=0;j<ag.getProyectos().size();j++) {
 						if (String.valueOf(ag.getProyectos().get(j).getNombre()).equals(p)) pr=ag.getProyectos().get(j);
@@ -231,14 +242,19 @@ public class VentanaProyectos {
 				
 			}
 		});
-		for ( int i = 0; i < ag.getProyectos().size(); i++ ){
-			if (ag.getProyectos().get(i).getUsuario()==us) proyects.addElement(ag.getProyectos().get(i).getNombre() );
-		}
+		
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(list);
-
+	
 		
 		
+		
+	}
+	public void refrescarLista() {
+		proyectos.removeAllElements();
+		for ( int i = 0; i < ag.getProyectos().size(); i++ ){
+			if (ag.getProyectos().get(i).getUsuario()==us) proyectos.addElement(ag.getProyectos().get(i).getNombre() );
+		}
 	}
 
 }
