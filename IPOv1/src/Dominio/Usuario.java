@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import javax.swing.ImageIcon;
+
 public class Usuario {
 
 	private String usuario;
@@ -16,12 +18,13 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private Date ult_conex;
+	private String Img;
 	private ArrayList<RegistroChats> RegistroChats;
 	private ArrayList<Proyecto> proyectos;
 	private DateFormat fm= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	
-	public Usuario(String usuario, String rol, String contrasena, String email, String descripcion, String nombre, String apellido) {
+	public Usuario(String usuario, String rol, String contrasena, String email, String descripcion, String nombre, String apellido,String ImgRoute) {
 		this.usuario = usuario;
 		this.rol = rol;
 		this.contrasena = contrasena;
@@ -32,9 +35,18 @@ public class Usuario {
 		this.nombre=nombre;
 		this.apellido=apellido;
 		this.RegistroChats=new ArrayList<RegistroChats>();
+		Img = ImgRoute;
 	}	
 	public String getUsuario() {
 		return usuario;
+	}
+	
+	public String getImage() {
+		return Img;
+	}
+	
+	public void setImage(String Image) {
+		Img=Image;
 	}
 	
 	public void InicializarRegistro(ArrayList<Usuario> usuarios) {

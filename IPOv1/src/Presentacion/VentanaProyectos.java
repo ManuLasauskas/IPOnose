@@ -60,7 +60,9 @@ public class VentanaProyectos {
 	private JFrame frmIproyect;
 	private Usuario us;
 	private Agente ag = Agente.getInstance();
+
 	private DefaultListModel<String> proyectos;
+	private JPanel user_image;
 
 	/**
 	 * Create the application.
@@ -92,7 +94,7 @@ public class VentanaProyectos {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frmIproyect.getContentPane().setLayout(gridBagLayout);
 		
-		JPanel user_image = new JPanel();
+		user_image = new JPanel();
 		GridBagConstraints gbc_user_image = new GridBagConstraints();
 		gbc_user_image.gridwidth = 2;
 		gbc_user_image.gridheight = 3;
@@ -102,7 +104,12 @@ public class VentanaProyectos {
 		gbc_user_image.gridy = 1;
 		frmIproyect.getContentPane().add(user_image, gbc_user_image);
 		
-		JLabel lblBienvenido = new JLabel("Bienvenido:");
+		if(!us.getImage().equals("")){
+			Imagen im = new Imagen(us.getImage(),user_image);
+			user_image.add(im).repaint();
+		}
+		
+		JLabel lblBienvenido = new JLabel("Bienvenido: ");
 		lblBienvenido.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblBienvenido = new GridBagConstraints();
 		gbc_lblBienvenido.gridwidth = 2;
@@ -209,8 +216,9 @@ public class VentanaProyectos {
 		display_tab.addTab("Tareas", null, tareas_panel, null);
 		
 		JPanel chat_panel = new UserChat(us);
+		chat_panel.setEnabled(false);
 		display_tab.addTab("Chat", null, chat_panel, null);
-		chat_panel.setLayout(null);
+
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();

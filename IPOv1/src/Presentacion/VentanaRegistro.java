@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.MaskFormatter;
 
 import com.sun.jmx.snmp.Timestamp;
@@ -26,11 +28,14 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.ImageFilter;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.awt.event.ActionListener;
@@ -61,6 +66,8 @@ public class VentanaRegistro {
 	private JButton btnNewButton;
 	private JLabel lblCaracteresMinimo;
 	private JButton btnSalir;
+	private JButton btnSeleccionarImagen;
+	private String ImageSelected;
 
 	/**
 	 * Launch the application.
@@ -79,10 +86,11 @@ public class VentanaRegistro {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		ImageSelected="";
 		frmProjectwizardIpo = new JFrame();
 		frmProjectwizardIpo.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaRegistro.class.getResource("/Resources/logg.png")));
 		frmProjectwizardIpo.setTitle("IPROject");
-		frmProjectwizardIpo.setBounds(100, 100, 517, 452);
+		frmProjectwizardIpo.setBounds(100, 100, 540, 504);
 		frmProjectwizardIpo.setVisible(true);
 		frmProjectwizardIpo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -98,15 +106,14 @@ public class VentanaRegistro {
 			gbc_panel.fill = GridBagConstraints.BOTH;
 			gbc_panel.gridheight = 7;
 			gbc_panel.gridwidth = 7;
-			gbc_panel.insets = new Insets(0, 0, 5, 5);
 			gbc_panel.gridx = 0;
 			gbc_panel.gridy = 0;
 			frmProjectwizardIpo.getContentPane().add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
 			gbl_panel.columnWidths = new int[]{76, 66, 72, 0, 67, 51, 105, 47, 0};
-			gbl_panel.rowHeights = new int[]{32, 0, 29, 31, 24, 32, 28, 32, 86, 35, 0, 0};
+			gbl_panel.rowHeights = new int[]{32, 0, 29, 31, 24, 32, 35, 42, 43, 86, 35, 0, 0};
 			gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			{
 				lblDNI = new JLabel("DNI");
@@ -296,12 +303,26 @@ public class VentanaRegistro {
 				txtApellido.setColumns(10);
 			}
 			{
+				btnSeleccionarImagen = new JButton("Seleccionar Imagen");
+				btnSeleccionarImagen.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						ShowImageFinder();
+					}
+				});
+				GridBagConstraints gbc_btnSeleccionarImagen = new GridBagConstraints();
+				gbc_btnSeleccionarImagen.gridwidth = 2;
+				gbc_btnSeleccionarImagen.insets = new Insets(0, 0, 5, 5);
+				gbc_btnSeleccionarImagen.gridx = 1;
+				gbc_btnSeleccionarImagen.gridy = 7;
+				panel.add(btnSeleccionarImagen, gbc_btnSeleccionarImagen);
+			}
+			{
 				lblDescripcion = new JLabel("Descripcion");
 				GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
 				gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
 				gbc_lblDescripcion.insets = new Insets(0, 0, 5, 5);
 				gbc_lblDescripcion.gridx = 0;
-				gbc_lblDescripcion.gridy = 7;
+				gbc_lblDescripcion.gridy = 8;
 				panel.add(lblDescripcion, gbc_lblDescripcion);
 			}
 			{
@@ -313,6 +334,7 @@ public class VentanaRegistro {
 					}
 				});
 				GridBagConstraints gbc_txtDescripcion = new GridBagConstraints();
+				gbc_txtDescripcion.gridheight = 2;
 				gbc_txtDescripcion.gridwidth = 6;
 				gbc_txtDescripcion.insets = new Insets(0, 0, 5, 5);
 				gbc_txtDescripcion.fill = GridBagConstraints.BOTH;
@@ -328,7 +350,7 @@ public class VentanaRegistro {
 				gbc_btnSalir.gridwidth = 2;
 				gbc_btnSalir.insets = new Insets(0, 0, 0, 5);
 				gbc_btnSalir.gridx = 0;
-				gbc_btnSalir.gridy = 10;
+				gbc_btnSalir.gridy = 11;
 				panel.add(btnSalir, gbc_btnSalir);
 			}
 			{
@@ -340,11 +362,24 @@ public class VentanaRegistro {
 				gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
 				gbc_btnNewButton.gridwidth = 2;
 				gbc_btnNewButton.gridx = 5;
-				gbc_btnNewButton.gridy = 10;
+				gbc_btnNewButton.gridy = 11;
 				panel.add(btnNewButton, gbc_btnNewButton);
 			}
 		}
 	}
+	
+	public void ShowImageFinder() {
+		// muestra el cuadro de diálogo de archivos, para que el usuario pueda elegir el archivo a abrir
+		JFileChooser selectorArchivos = new JFileChooser();
+		selectorArchivos.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		selectorArchivos.setFileFilter(new FileNameExtensionFilter("Image files", "png"));
+		int option = selectorArchivos.showSaveDialog(null);
+        if(option == JFileChooser.APPROVE_OPTION) {
+           ImageSelected= selectorArchivos.getSelectedFile().getAbsolutePath();
+        }
+
+	}
+	
 
 	private class FormattedTextFieldKeyListener extends KeyAdapter {
 		@Override
@@ -380,7 +415,9 @@ public class VentanaRegistro {
 					Date date = Calendar.getInstance().getTime();
 					String fecha = formato.format(date);
 					Agente ag = Agente.getInstance();
-					ag.insertUsuario(new Usuario(txtDNI.getText(), txtRol.getText(), String.valueOf(fldpass.getPassword()), txtemail.getText(), txtDescripcion.getText(),txtNombre.getText(),txtApellido.getText()));
+
+					ag.insertUsuario(new Usuario(txtDNI.getText(), txtRol.getText(), String.valueOf(fldpass.getPassword()), txtemail.getText(), txtDescripcion.getText(),txtNombre.getText(),txtApellido.getText(),ImageSelected));
+
 				frmProjectwizardIpo.dispose();
 				VentanaInicio vx=new VentanaInicio();
 			}
