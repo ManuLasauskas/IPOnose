@@ -1,5 +1,6 @@
 package Persistencia;
 
+import java.awt.Toolkit;
 import java.sql.*;
 import java.util.*;
 import java.util.Date;
@@ -115,8 +116,8 @@ public class Agente {
 		Date rep = init.getTime();
 		Date rep2=end.getTime();
 		
-		Usuario u1= new Usuario("03924938", "Programador", "1234", "joselu@joselu", "Ingeniero Tecnico", "Jose Luis","Mira Serrano","");
-		Usuario u2= new Usuario("05715980", "Lead Ingenier", "1234", "smoke@smoke", "Ingeniero Tecnico",  "Manuel","Garcia Diaz-Santos","");
+		Usuario u1= new Usuario("03924938", "Programador", "1234", "joselu@joselu", "Ingeniero Tecnico", "Jose Luis","Mira Serrano",Toolkit.getDefaultToolkit().getImage(Agente.class.getResource("/Resources/manue.jpg")));
+		Usuario u2= new Usuario("05715980", "Lead Ingenier", "1234", "smoke@smoke", "Ingeniero Tecnico",  "Manuel","Garcia Diaz-Santos",Toolkit.getDefaultToolkit().getImage(Agente.class.getResource("/Resources/manue.jpg")));
 
 		Usuarios.add(u1);
 		Usuarios.add(u2);

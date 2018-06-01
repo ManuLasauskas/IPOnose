@@ -1,6 +1,7 @@
 package Presentacion;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -30,6 +31,7 @@ import Persistencia.Agente;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -38,7 +40,7 @@ import java.awt.event.MouseEvent;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class VentanaEdicionProyecto extends JFrame {
+public class VentanaEdicionProyecto extends JDialog {
 
 	private JPanel contentPane;
 	private JLabel lblNombreDelProyecto;
@@ -56,6 +58,7 @@ public class VentanaEdicionProyecto extends JFrame {
 	private Proyecto p = null;
 	private Agente ag=Agente.getInstance();
 	private Usuario creador=null;
+	private VentanaProyectos parent;
 
 
 	/**
@@ -65,20 +68,23 @@ public class VentanaEdicionProyecto extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaEdicionProyecto(Proyecto p) {
+	public VentanaEdicionProyecto(VentanaProyectos parent,Proyecto p) {
+		this.parent=parent;
 		iniciar();
 		this.p=p;
 		rellenarCampos();
 		
 	}
 	
-	public VentanaEdicionProyecto(Usuario creador) {
-		iniciar();
+	public VentanaEdicionProyecto(VentanaProyectos parent, Usuario creador) {
+		this.parent=parent;
 		this.creador=creador;
+
+		iniciar();
 		
 	}
 	public VentanaEdicionProyecto() {
-		setAutoRequestFocus(true);
+		setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
 		iniciar();
 	}
 	public void iniciar() {
@@ -199,7 +205,10 @@ public class VentanaEdicionProyecto extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if (p!=null) actualizarProyecto();
-				else ag.getProyectos().add(new Proyecto (txtNombre.getText(), creador, dtInicio.getDate(),dtFin.getDate(),(Estado) comboBox.getSelectedItem(),textField.getText()));
+				else {
+					ag.getProyectos().add(new Proyecto (txtNombre.getText(), creador, dtInicio.getDate(),dtFin.getDate(),(Estado) comboBox.getSelectedItem(),textField.getText()));
+					dispose();
+				}
 			}
 			});
 		

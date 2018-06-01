@@ -1,5 +1,6 @@
 package Dominio;
 
+import java.awt.Image;
 import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -18,13 +19,13 @@ public class Usuario {
 	private String nombre;
 	private String apellido;
 	private Date ult_conex;
-	private String Img;
+	private Image Img;
 	private ArrayList<RegistroChats> RegistroChats;
 	private ArrayList<Proyecto> proyectos;
 	private DateFormat fm= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	
-	public Usuario(String usuario, String rol, String contrasena, String email, String descripcion, String nombre, String apellido,String ImgRoute) {
+	public Usuario(String usuario, String rol, String contrasena, String email, String descripcion, String nombre, String apellido,Image ImgRoute) {
 		this.usuario = usuario;
 		this.rol = rol;
 		this.contrasena = contrasena;
@@ -35,17 +36,17 @@ public class Usuario {
 		this.nombre=nombre;
 		this.apellido=apellido;
 		this.RegistroChats=new ArrayList<RegistroChats>();
-		Img = ImgRoute;
+		Img=ImgRoute;
 	}	
 	public String getUsuario() {
 		return usuario;
 	}
 	
-	public String getImage() {
+	public Image getImage() {
 		return Img;
 	}
 	
-	public void setImage(String Image) {
+	public void setImage(Image Image) {
 		Img=Image;
 	}
 	

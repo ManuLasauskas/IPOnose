@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.sun.prism.Image;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import Dominio.Proyecto;
 import Dominio.Usuario;
@@ -17,8 +18,10 @@ import Persistencia.Agente;
 
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
@@ -54,16 +57,20 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class VentanaProyectos {
 
 	private JFrame frmIproyect;
 	private Usuario us;
 	private Agente ag = Agente.getInstance();
-
 	private DefaultListModel<String> proyectos;
-	private JPanel user_image;
-
+	private JButton btnedit;
+	private JList list;
+	private Proyecto seleccion;
 	/**
 	 * Create the application.
 	 */
@@ -71,7 +78,7 @@ public class VentanaProyectos {
 		this.us=us;
 		System.out.println(this.us);
 		initialize();
-		
+		darLista();
 	}
 
 	/**
@@ -79,6 +86,15 @@ public class VentanaProyectos {
 	 */
 	private void initialize() {
 		frmIproyect = new JFrame();
+		frmIproyect.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				if (JOptionPane.showConfirmDialog(new JFrame(), "¿Desea usted cerrar la aplicación?", "Cerrando IPROject", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+					System.exit(0);
+				}
+				
+			}
+		});
 		frmIproyect.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaProyectos.class.getResource("/Resources/logg.png")));
 		frmIproyect.setTitle("IPROyect");
 		frmIproyect.setResizable(false);
@@ -86,28 +102,25 @@ public class VentanaProyectos {
 		frmIproyect.setBounds(0,0, rectangulo.width-50, rectangulo.height-50);
 		frmIproyect.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frmIproyect.setVisible(true);
-		frmIproyect.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frmIproyect.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{34, 76, 21, 0, 0, 38, 0, 46, 52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{8, 42, 75, 10, 36, 35, 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35, 0, 0};
+		gridBagLayout.columnWidths = new int[]{34, 40, 46, 0, 0, 38, 0, 46, 52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{8, 42, 75, 10, 36, 35, 37, 0, 0, 0, 0, 0, 0, 0, 34, 56, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frmIproyect.getContentPane().setLayout(gridBagLayout);
 		
-		user_image = new JPanel();
-		GridBagConstraints gbc_user_image = new GridBagConstraints();
-		gbc_user_image.gridwidth = 2;
-		gbc_user_image.gridheight = 3;
-		gbc_user_image.insets = new Insets(0, 0, 5, 5);
-		gbc_user_image.fill = GridBagConstraints.BOTH;
-		gbc_user_image.gridx = 1;
-		gbc_user_image.gridy = 1;
-		frmIproyect.getContentPane().add(user_image, gbc_user_image);
 		
-		if(!us.getImage().equals("")){
-			Imagen im = new Imagen(us.getImage(),user_image);
-			user_image.add(im).repaint();
-		}
+		JLabel lblImage = new JLabel("");
+		GridBagConstraints gbc_lblImage = new GridBagConstraints();
+		lblImage.setIcon(new ImageIcon(us.getImage()));
+		gbc_lblImage.gridwidth = 2;
+		gbc_lblImage.gridheight = 2;
+		gbc_lblImage.insets = new Insets(0, 0, 5, 5);
+		gbc_lblImage.gridx = 1;
+		gbc_lblImage.gridy = 1;
+		frmIproyect.getContentPane().add(lblImage, gbc_lblImage);
 		
 		JLabel lblBienvenido = new JLabel("Bienvenido: ");
 		lblBienvenido.setHorizontalAlignment(SwingConstants.LEFT);
@@ -152,6 +165,7 @@ public class VentanaProyectos {
 		
 		JLabel lblMisProyectos = new JLabel("Mis proyectos");
 		GridBagConstraints gbc_lblMisProyectos = new GridBagConstraints();
+		gbc_lblMisProyectos.gridwidth = 2;
 		gbc_lblMisProyectos.anchor = GridBagConstraints.SOUTH;
 		gbc_lblMisProyectos.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMisProyectos.gridx = 1;
@@ -162,11 +176,8 @@ public class VentanaProyectos {
 		btnadd.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				VentanaEdicionProyecto vx = new VentanaEdicionProyecto(us);
-				vx.setAlwaysOnTop(true);
-				vx.setVisible(true);
-				while(vx.isDisplayable()) {}
-				refrescarLista();
+				cargarDialogoProyecto(null);
+				darLista();
 			}
 		});
 		btnadd.setIcon(new ImageIcon(VentanaProyectos.class.getResource("/Resources/Anadir.png")));
@@ -178,9 +189,17 @@ public class VentanaProyectos {
 		gbc_btnadd.gridy = 4;
 		frmIproyect.getContentPane().add(btnadd, gbc_btnadd);
 		
-		JButton btnedit = new JButton("");
+		btnedit = new JButton("");
+		btnedit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				cargarDialogoProyecto(seleccion);	
+				proyectos.removeElement(seleccion.getNombre());
+			}
+		});
 		btnedit.setIcon(new ImageIcon(VentanaProyectos.class.getResource("/Resources/lapiz.png")));
 		btnedit.setBorder(BorderFactory.createEmptyBorder());
+		btnedit.setEnabled(false);
 		GridBagConstraints gbc_btnedit = new GridBagConstraints();
 		gbc_btnedit.insets = new Insets(0, 0, 5, 5);
 		gbc_btnedit.gridx = 5;
@@ -188,6 +207,14 @@ public class VentanaProyectos {
 		frmIproyect.getContentPane().add(btnedit, gbc_btnedit);
 		
 		JButton btndelete = new JButton("");
+		btndelete.setEnabled(false);
+		btndelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				proyectos.removeElement(seleccion.getNombre());
+				ag.getProyectos().remove(seleccion);
+				}
+		});
 		btndelete.setIcon(new ImageIcon(VentanaProyectos.class.getResource("/Resources/papelera.png")));
 		btndelete.setBorder(BorderFactory.createEmptyBorder());
 		GridBagConstraints gbc_btndelete = new GridBagConstraints();
@@ -200,7 +227,7 @@ public class VentanaProyectos {
 		JTabbedPane display_tab = new JTabbedPane(JTabbedPane.TOP);
 		GridBagConstraints gbc_display_tab = new GridBagConstraints();
 		gbc_display_tab.insets = new Insets(0, 0, 0, 5);
-		gbc_display_tab.gridheight = 14;
+		gbc_display_tab.gridheight = 13;
 		gbc_display_tab.gridwidth = 11;
 		gbc_display_tab.fill = GridBagConstraints.BOTH;
 		gbc_display_tab.gridx = 7;
@@ -222,7 +249,7 @@ public class VentanaProyectos {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridheight = 12;
+		gbc_scrollPane.gridheight = 10;
 		gbc_scrollPane.gridwidth = 5;
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
@@ -231,38 +258,78 @@ public class VentanaProyectos {
 		frmIproyect.getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		proyectos = new DefaultListModel<>();
-		JList list = new JList(proyectos);
-		
-		list.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
-					String p = proyectos.get(list.getSelectedIndex());
-					Proyecto pr=null;
-					for (int j=0;j<ag.getProyectos().size();j++) {
-						if (String.valueOf(ag.getProyectos().get(j).getNombre()).equals(p)) pr=ag.getProyectos().get(j);
-					}
-					panel.fill(pr);
-					System.out.println(list.getSelectedValue());
-					tareas_panel.setEnabled(true);
-					tareas_panel.eliminarTareas();
-					tareas_panel.mostrarTareas(pr);
-					
-					
-				
+		list = new JList(proyectos);
+		list.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String p = list.getSelectedValue().toString();
+				seleccion=null;
+				if (list.getSelectedValue() != null) {
+					btnedit.setEnabled(true);
+					btndelete.setEnabled(true);
+				}
+				System.out.println(ag.getProyectos().size());
+				for (int j=0;j<ag.getProyectos().size();j++) {
+					if (String.valueOf(ag.getProyectos().get(j).getNombre()).equals(p)) seleccion=ag.getProyectos().get(j);
+				}
+				if (seleccion!=null) panel.fill(seleccion);
+				tareas_panel.setEnabled(true);
+				tareas_panel.eliminarTareas();
+				tareas_panel.mostrarTareas(seleccion);
 			}
 		});
 		
+		
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(list);
+		
+		JButton btnhelp = new JButton("");
+		btnhelp.setMnemonic('H');
+		btnhelp.setIcon(new ImageIcon(VentanaProyectos.class.getResource("/Resources/help.png")));
+		btnhelp.setBorder(BorderFactory.createEmptyBorder());
+		GridBagConstraints gbc_btnhelp = new GridBagConstraints();
+		gbc_btnhelp.insets = new Insets(0, 0, 5, 5);
+		gbc_btnhelp.gridx = 1;
+		gbc_btnhelp.gridy = 15;
+		frmIproyect.getContentPane().add(btnhelp, gbc_btnhelp);
+		
+		JButton button = new JButton("");
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaAjustes vx = new VentanaAjustes(us);
+				vx.setVisible(true);
+			}
+		});
+		button.setIcon(new ImageIcon(VentanaProyectos.class.getResource("/Resources/ajustes.jpg")));
+		button.setBorder(BorderFactory.createEmptyBorder());
+		GridBagConstraints gbc_button = new GridBagConstraints();
+		gbc_button.anchor = GridBagConstraints.WEST;
+		gbc_button.insets = new Insets(0, 0, 5, 5);
+		gbc_button.gridx = 2;
+		gbc_button.gridy = 15;
+		frmIproyect.getContentPane().add(button, gbc_button);
 	
 		
 		
 		
 	}
-	public void refrescarLista() {
-		proyectos.removeAllElements();
+	public void darLista() {
+		proyectos.clear();
 		for ( int i = 0; i < ag.getProyectos().size(); i++ ){
 			if (ag.getProyectos().get(i).getUsuario()==us) proyectos.addElement(ag.getProyectos().get(i).getNombre() );
 		}
+		
+	}
+	public void cargarDialogoProyecto(Proyecto p) {
+		VentanaEdicionProyecto vx;
+		if (p==null) vx = new VentanaEdicionProyecto(this, us);
+		else {
+			vx = new VentanaEdicionProyecto(this,p);
+		}
+		vx.setModal(true);
+		vx.setVisible(true);
+		
 	}
 
 }

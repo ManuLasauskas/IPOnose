@@ -416,7 +416,7 @@ public class VentanaRegistro {
 					String fecha = formato.format(date);
 					Agente ag = Agente.getInstance();
 
-					ag.insertUsuario(new Usuario(txtDNI.getText(), txtRol.getText(), String.valueOf(fldpass.getPassword()), txtemail.getText(), txtDescripcion.getText(),txtNombre.getText(),txtApellido.getText(),ImageSelected));
+					ag.insertUsuario(new Usuario(txtDNI.getText(), txtRol.getText(), String.valueOf(fldpass.getPassword()), txtemail.getText(), txtDescripcion.getText(),txtNombre.getText(),txtApellido.getText(),null));
 
 				frmProjectwizardIpo.dispose();
 				VentanaInicio vx=new VentanaInicio();
