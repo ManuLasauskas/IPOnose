@@ -89,7 +89,7 @@ public class VentanaRegistro {
 		ImageSelected="";
 		frmProjectwizardIpo = new JFrame();
 		frmProjectwizardIpo.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaRegistro.class.getResource("/Resources/logg.png")));
-		frmProjectwizardIpo.setTitle("IPROject");
+		frmProjectwizardIpo.setTitle(MessagesIPROject.getString("VentanaRegistro.frmProjectwizardIpo.title")); //$NON-NLS-1$
 		frmProjectwizardIpo.setBounds(100, 100, 540, 504);
 		frmProjectwizardIpo.setVisible(true);
 		frmProjectwizardIpo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -101,7 +101,7 @@ public class VentanaRegistro {
 		frmProjectwizardIpo.getContentPane().setLayout(gridBagLayout);
 		{
 			panel = new JPanel();
-			panel.setBorder(new TitledBorder(null, "Formulario de registro", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBorder(new TitledBorder(null, MessagesIPROject.getString("VentanaRegistro.panel.borderTitle"), TitledBorder.LEADING, TitledBorder.TOP, null, null)); //$NON-NLS-1$
 			GridBagConstraints gbc_panel = new GridBagConstraints();
 			gbc_panel.fill = GridBagConstraints.BOTH;
 			gbc_panel.gridheight = 7;
@@ -116,7 +116,7 @@ public class VentanaRegistro {
 			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			{
-				lblDNI = new JLabel("DNI");
+				lblDNI = new JLabel(MessagesIPROject.getString("VentanaRegistro.lblDNI.text")); //$NON-NLS-1$
 				GridBagConstraints gbc_lblDNI = new GridBagConstraints();
 				gbc_lblDNI.anchor = GridBagConstraints.EAST;
 				gbc_lblDNI.insets = new Insets(0, 0, 5, 5);
@@ -146,7 +146,7 @@ public class VentanaRegistro {
 				
 			}
 			{
-				lblContrasea = new JLabel("Contraseña");
+				lblContrasea = new JLabel(MessagesIPROject.getString("VentanaRegistro.lblContrasea.text")); //$NON-NLS-1$
 				GridBagConstraints gbc_lblContrasea = new GridBagConstraints();
 				gbc_lblContrasea.gridwidth = 2;
 				gbc_lblContrasea.anchor = GridBagConstraints.EAST;
@@ -167,7 +167,7 @@ public class VentanaRegistro {
 				panel.add(fldpass, gbc_fldpass);
 			}
 			{
-				lblCaracteresMinimo = new JLabel("4 caracteres minimo");
+				lblCaracteresMinimo = new JLabel(MessagesIPROject.getString("VentanaRegistro.lblCaracteresMinimo.text")); //$NON-NLS-1$
 				lblCaracteresMinimo.setForeground(Color.RED);
 				lblCaracteresMinimo.setFont(new Font("Tahoma", Font.ITALIC, 11));
 				GridBagConstraints gbc_lblCaracteresMinimo = new GridBagConstraints();
@@ -178,7 +178,7 @@ public class VentanaRegistro {
 				panel.add(lblCaracteresMinimo, gbc_lblCaracteresMinimo);
 			}
 			{
-				lblConfirmarContrasea = new JLabel("Confirmar contraseña");
+				lblConfirmarContrasea = new JLabel(MessagesIPROject.getString("VentanaRegistro.lblConfirmarContrasea.text")); //$NON-NLS-1$
 				GridBagConstraints gbc_lblConfirmarContrasea = new GridBagConstraints();
 				gbc_lblConfirmarContrasea.gridwidth = 2;
 				gbc_lblConfirmarContrasea.anchor = GridBagConstraints.EAST;
@@ -199,7 +199,7 @@ public class VentanaRegistro {
 				panel.add(fldpassConfirm, gbc_fldpassConfirm);
 			}
 			{
-				lblRol = new JLabel("Rol");
+				lblRol = new JLabel(MessagesIPROject.getString("VentanaRegistro.lblRol.text")); //$NON-NLS-1$
 				GridBagConstraints gbc_lblRol = new GridBagConstraints();
 				gbc_lblRol.anchor = GridBagConstraints.EAST;
 				gbc_lblRol.insets = new Insets(0, 0, 5, 5);
@@ -225,7 +225,7 @@ public class VentanaRegistro {
 				txtRol.setColumns(10);
 			}
 			{
-				lblEmail = new JLabel("E-mail");
+				lblEmail = new JLabel(MessagesIPROject.getString("VentanaRegistro.lblEmail.text")); //$NON-NLS-1$
 				GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 				gbc_lblEmail.anchor = GridBagConstraints.EAST;
 				gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
@@ -251,7 +251,7 @@ public class VentanaRegistro {
 				txtemail.setColumns(10);
 			}
 			{
-				lblNombre = new JLabel("Nombre");
+				lblNombre = new JLabel(MessagesIPROject.getString("VentanaRegistro.lblNombre.text")); //$NON-NLS-1$
 				GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 				gbc_lblNombre.anchor = GridBagConstraints.EAST;
 				gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
@@ -277,7 +277,7 @@ public class VentanaRegistro {
 				txtNombre.setColumns(10);
 			}
 			{
-				lblApellidos = new JLabel("Apellido");
+				lblApellidos = new JLabel(MessagesIPROject.getString("VentanaRegistro.lblApellidos.text")); //$NON-NLS-1$
 				GridBagConstraints gbc_lblApellidos = new GridBagConstraints();
 				gbc_lblApellidos.anchor = GridBagConstraints.EAST;
 				gbc_lblApellidos.insets = new Insets(0, 0, 5, 5);
@@ -303,7 +303,7 @@ public class VentanaRegistro {
 				txtApellido.setColumns(10);
 			}
 			{
-				btnSeleccionarImagen = new JButton("Seleccionar Imagen");
+				btnSeleccionarImagen = new JButton(MessagesIPROject.getString("VentanaRegistro.btnSeleccionarImagen.text")); //$NON-NLS-1$
 				btnSeleccionarImagen.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						ShowImageFinder();
@@ -317,7 +317,7 @@ public class VentanaRegistro {
 				panel.add(btnSeleccionarImagen, gbc_btnSeleccionarImagen);
 			}
 			{
-				lblDescripcion = new JLabel("Descripcion");
+				lblDescripcion = new JLabel(MessagesIPROject.getString("VentanaRegistro.lblDescripcion.text")); //$NON-NLS-1$
 				GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
 				gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
 				gbc_lblDescripcion.insets = new Insets(0, 0, 5, 5);
@@ -344,7 +344,7 @@ public class VentanaRegistro {
 				txtDescripcion.setColumns(10);
 			}
 			{
-				btnSalir = new JButton("SALIR");
+				btnSalir = new JButton(MessagesIPROject.getString("VentanaRegistro.btnSalir.text")); //$NON-NLS-1$
 				btnSalir.addMouseListener(new BtnSalirMouseListener());
 				GridBagConstraints gbc_btnSalir = new GridBagConstraints();
 				gbc_btnSalir.gridwidth = 2;
@@ -354,7 +354,7 @@ public class VentanaRegistro {
 				panel.add(btnSalir, gbc_btnSalir);
 			}
 			{
-				btnNewButton = new JButton("Guardar");
+				btnNewButton = new JButton(MessagesIPROject.getString("VentanaRegistro.btnNewButton.text")); //$NON-NLS-1$
 				btnNewButton.addActionListener(new BtnNewButtonActionListener());
 				btnNewButton.setEnabled(false);
 				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();

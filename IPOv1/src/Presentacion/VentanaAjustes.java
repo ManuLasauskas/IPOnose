@@ -54,7 +54,7 @@ public class VentanaAjustes extends JFrame {
 	public VentanaAjustes(Usuario us) {
 		this.us=us;
 		setResizable(false);
-		setTitle("IPROyect");
+		setTitle(MessagesIPROject.getString("VentanaAjustes.this.title")); //$NON-NLS-1$
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaAjustes.class.getResource("/Resources/logg.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 527, 252);
@@ -68,7 +68,7 @@ public class VentanaAjustes extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		lblNombre = new JLabel("Nombre");
+		lblNombre = new JLabel(MessagesIPROject.getString("VentanaAjustes.lblNombre.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNombre.anchor = GridBagConstraints.EAST;
@@ -87,7 +87,7 @@ public class VentanaAjustes extends JFrame {
 		contentPane.add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		lblContrasea = new JLabel("Contraseña");
+		lblContrasea = new JLabel(MessagesIPROject.getString("VentanaAjustes.lblContrasea.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblContrasea = new GridBagConstraints();
 		gbc_lblContrasea.anchor = GridBagConstraints.EAST;
 		gbc_lblContrasea.insets = new Insets(0, 0, 5, 5);
@@ -104,7 +104,7 @@ public class VentanaAjustes extends JFrame {
 		gbc_passwordField.gridy = 2;
 		contentPane.add(passwordField, gbc_passwordField);
 		
-		btnGuardar = new JButton("GUARDAR");
+		btnGuardar = new JButton(MessagesIPROject.getString("VentanaAjustes.btnGuardar.text")); //$NON-NLS-1$
 		btnGuardar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -149,7 +149,7 @@ public class VentanaAjustes extends JFrame {
 		gbc_btnGuardar.gridy = 1;
 		contentPane.add(btnGuardar, gbc_btnGuardar);
 		
-		lblRol = new JLabel("Rol");
+		lblRol = new JLabel(MessagesIPROject.getString("VentanaAjustes.lblRol.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblRol = new GridBagConstraints();
 		gbc_lblRol.anchor = GridBagConstraints.EAST;
 		gbc_lblRol.insets = new Insets(0, 0, 5, 5);
@@ -167,7 +167,7 @@ public class VentanaAjustes extends JFrame {
 		contentPane.add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
 		
-		lblEmail = new JLabel("E-mail");
+		lblEmail = new JLabel(MessagesIPROject.getString("VentanaAjustes.lblEmail.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.EAST;
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
@@ -185,7 +185,7 @@ public class VentanaAjustes extends JFrame {
 		contentPane.add(textField_2, gbc_textField_2);
 		textField_2.setColumns(10);
 		
-		lblNombre_1 = new JLabel("Nombre");
+		lblNombre_1 = new JLabel(MessagesIPROject.getString("VentanaAjustes.lblNombre_1.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblNombre_1 = new GridBagConstraints();
 		gbc_lblNombre_1.anchor = GridBagConstraints.EAST;
 		gbc_lblNombre_1.insets = new Insets(0, 0, 5, 5);
@@ -203,7 +203,7 @@ public class VentanaAjustes extends JFrame {
 		contentPane.add(textField_3, gbc_textField_3);
 		textField_3.setColumns(10);
 		
-		btnBorrarDatos = new JButton("BORRAR DATOS");
+		btnBorrarDatos = new JButton(MessagesIPROject.getString("VentanaAjustes.btnBorrarDatos.text")); //$NON-NLS-1$
 		btnBorrarDatos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -248,7 +248,7 @@ public class VentanaAjustes extends JFrame {
 		gbc_btnBorrarDatos.gridy = 4;
 		contentPane.add(btnBorrarDatos, gbc_btnBorrarDatos);
 		
-		lblApellidos = new JLabel("Apellidos");
+		lblApellidos = new JLabel(MessagesIPROject.getString("VentanaAjustes.lblApellidos.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblApellidos = new GridBagConstraints();
 		gbc_lblApellidos.anchor = GridBagConstraints.EAST;
 		gbc_lblApellidos.insets = new Insets(0, 0, 5, 5);

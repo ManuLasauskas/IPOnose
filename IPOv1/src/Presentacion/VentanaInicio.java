@@ -31,10 +31,9 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 
-public class VentanaInicio {
+public class VentanaInicio{
 	private JFrame frmProjectwizardIpo;
 	private JPanel panel;
-	private JComboBox comboBox;
 	private JLabel lblIdioma;
 	private JLabel lblUsuario;
 	private JLabel lblContrasea;
@@ -45,6 +44,9 @@ public class VentanaInicio {
 	private JLabel lblnoEstRegistrado;
 	private JLabel lblLogo;
 	private JLabel lblStatus;
+	private JButton btnspain;
+	private JButton btningles;
+	private JButton btnHelp;
 
 	/**
 	 * Launch the application.
@@ -78,7 +80,7 @@ public class VentanaInicio {
 	private void initialize() {
 		frmProjectwizardIpo = new JFrame();
 		frmProjectwizardIpo.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaInicio.class.getResource("/Resources/logg.png")));
-		frmProjectwizardIpo.setTitle("ProjectWizard  - IPO 2017");
+		frmProjectwizardIpo.setTitle(MessagesIPROject.getString("VentanaInicio.frmProjectwizardIpo.title")); //$NON-NLS-1$
 		frmProjectwizardIpo.setBounds(100, 100, 511, 310);
 		frmProjectwizardIpo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmProjectwizardIpo.getContentPane().setLayout(null);
@@ -88,22 +90,17 @@ public class VentanaInicio {
 			frmProjectwizardIpo.getContentPane().add(panel);
 			panel.setLayout(null);
 			{
-				comboBox = new JComboBox();
-				comboBox.setBounds(316, 34, 100, 20);
-				panel.add(comboBox);
-			}
-			{
-				lblIdioma = new JLabel("Idioma");
-				lblIdioma.setBounds(190, 37, 46, 14);
+				lblIdioma = new JLabel(MessagesIPROject.getString("VentanaInicio.lblIdioma.text")); //$NON-NLS-1$
+				lblIdioma.setBounds(190, 37, 90, 14);
 				panel.add(lblIdioma);
 			}
 			{
-				lblUsuario = new JLabel("Usuario");
-				lblUsuario.setBounds(190, 81, 46, 14);
+				lblUsuario = new JLabel(MessagesIPROject.getString("VentanaInicio.lblUsuario.text")); //$NON-NLS-1$
+				lblUsuario.setBounds(190, 81, 105, 14);
 				panel.add(lblUsuario);
 			}
 			{
-				lblContrasea = new JLabel("Contraseña");
+				lblContrasea = new JLabel(MessagesIPROject.getString("VentanaInicio.lblContrasea.text")); //$NON-NLS-1$
 				lblContrasea.setBounds(185, 140, 105, 14);
 				panel.add(lblContrasea);
 			}
@@ -127,7 +124,7 @@ public class VentanaInicio {
 				panel.add(userField);
 			}
 			{
-				btnIniciarSesion = new JButton("INICIAR SESION");
+				btnIniciarSesion = new JButton(MessagesIPROject.getString("VentanaInicio.btnIniciarSesion.text")); //$NON-NLS-1$
 				btnIniciarSesion.addActionListener(new BtnIniciarSesionActionListener());
 				btnIniciarSesion.addMouseListener(new BtnIniciarSesionMouseListener());
 				btnIniciarSesion.addKeyListener(new BtnIniciarSesionKeyListener());
@@ -137,13 +134,13 @@ public class VentanaInicio {
 			
 			}
 			{
-				button = new JButton("REGISTRARSE");
+				button = new JButton(MessagesIPROject.getString("VentanaInicio.button.text")); //$NON-NLS-1$
 				button.setBounds(326, 221, 144, 23);
 				button.addMouseListener(new ButtonMouseListener());
 				panel.add(button);
 			}
 			{
-				lblnoEstRegistrado = new JLabel("¿No está registrado?");
+				lblnoEstRegistrado = new JLabel(MessagesIPROject.getString("VentanaInicio.lblnoEstRegistrado.text")); //$NON-NLS-1$
 				lblnoEstRegistrado.setBounds(316, 196, 154, 14);
 				lblnoEstRegistrado.setHorizontalAlignment(SwingConstants.CENTER);
 				panel.add(lblnoEstRegistrado);
@@ -160,6 +157,51 @@ public class VentanaInicio {
 				lblStatus.setFont(new Font("Tahoma", Font.PLAIN, 9));
 				lblStatus.setBounds(185, 165, 285, 20);
 				panel.add(lblStatus);
+			}
+			
+			btnspain = new JButton("");
+			btnspain.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					MessagesIPROject.setIdioma("");
+					VentanaInicio hola = new VentanaInicio();
+					hola.frmProjectwizardIpo.setVisible(true);
+					frmProjectwizardIpo.dispose();
+				}
+			});
+			btnspain.setIcon(new ImageIcon(VentanaInicio.class.getResource("/Resources/spain.jpg")));
+			btnspain.setBorder(BorderFactory.createEmptyBorder());
+			btnspain.setBounds(316, 33, 21, 23);
+			panel.add(btnspain);
+			{
+				btningles = new JButton("");
+				btningles.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						MessagesIPROject.setIdioma("inglés");
+						VentanaInicio hola = new VentanaInicio();
+						hola.frmProjectwizardIpo.setVisible(true);
+						frmProjectwizardIpo.dispose();
+					}
+				});
+				btningles.setIcon(new ImageIcon(VentanaInicio.class.getResource("/Resources/ingles.png")));
+				btningles.setBorder(BorderFactory.createEmptyBorder());
+				btningles.setBounds(347, 33, 21, 23);
+				panel.add(btningles);
+			}
+			{
+				btnHelp = new JButton(); 
+				btnHelp.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						DialogAyuda dh = new DialogAyuda();
+						dh.setVisible(true);
+					}
+				});
+				btnHelp.setIcon(new ImageIcon(VentanaInicio.class.getResource("/Resources/help.png")));
+				btnHelp.setBorder(BorderFactory.createEmptyBorder());
+				btnHelp.setBounds(25, 221, 21, 23);
+				panel.add(btnHelp);
 			}
 		}
 	}

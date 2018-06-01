@@ -154,6 +154,7 @@ public class Agente {
 		Proyectos.add(p1);
 		Proyectos.add(p2);
 		
+		
 		for(int i=0; i<Usuarios.size();i++) {
 			Usuarios.get(i).InicializarRegistro(Usuarios);
 		}

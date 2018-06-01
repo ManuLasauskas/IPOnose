@@ -88,7 +88,7 @@ public class VentanaEdicionProyecto extends JDialog {
 		iniciar();
 	}
 	public void iniciar() {
-		setTitle("IPROject");
+		setTitle(MessagesIPROject.getString("VentanaEdicionProyecto.this.title")); //$NON-NLS-1$
 		setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaEdicionProyecto.class.getResource("/Resources/logg.png")));
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -103,9 +103,9 @@ public class VentanaEdicionProyecto extends JDialog {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		lblNombreDelProyecto = new JLabel("Nombre del proyecto");
+		lblNombreDelProyecto = new JLabel(MessagesIPROject.getString("VentanaEdicionProyecto.lblNombreDelProyecto.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblNombreDelProyecto = new GridBagConstraints();
-		gbc_lblNombreDelProyecto.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_lblNombreDelProyecto.anchor = GridBagConstraints.SOUTHWEST;
 		gbc_lblNombreDelProyecto.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNombreDelProyecto.gridx = 1;
 		gbc_lblNombreDelProyecto.gridy = 0;
@@ -122,7 +122,7 @@ public class VentanaEdicionProyecto extends JDialog {
 		contentPane.add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 		
-		lblNewLabel = new JLabel("Fecha de creación");
+		lblNewLabel = new JLabel(MessagesIPROject.getString("VentanaEdicionProyecto.lblNewLabel.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.fill = GridBagConstraints.BOTH;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -139,7 +139,7 @@ public class VentanaEdicionProyecto extends JDialog {
 		gbc_dtInicio.gridy = 1;
 		contentPane.add(dtInicio, gbc_dtInicio);
 		
-		lblFechaDeFinalizacin = new JLabel("Fecha de finalización");
+		lblFechaDeFinalizacin = new JLabel(MessagesIPROject.getString("VentanaEdicionProyecto.lblFechaDeFinalizacin.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblFechaDeFinalizacin = new GridBagConstraints();
 		gbc_lblFechaDeFinalizacin.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblFechaDeFinalizacin.insets = new Insets(0, 0, 5, 5);
@@ -156,7 +156,7 @@ public class VentanaEdicionProyecto extends JDialog {
 		gbc_dtFin.gridy = 2;
 		contentPane.add(dtFin, gbc_dtFin);
 		
-		lblEstado = new JLabel("Estado");
+		lblEstado = new JLabel(MessagesIPROject.getString("VentanaEdicionProyecto.lblEstado.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
 		gbc_lblEstado.anchor = GridBagConstraints.WEST;
 		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
@@ -173,7 +173,7 @@ public class VentanaEdicionProyecto extends JDialog {
 		gbc_comboBox.gridy = 3;
 		contentPane.add(comboBox, gbc_comboBox);
 		
-		lblDescripcin = new JLabel("Descripción");
+		lblDescripcin = new JLabel(MessagesIPROject.getString("VentanaEdicionProyecto.lblDescripcin.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblDescripcin = new GridBagConstraints();
 		gbc_lblDescripcin.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblDescripcin.insets = new Insets(0, 0, 5, 5);
@@ -191,7 +191,7 @@ public class VentanaEdicionProyecto extends JDialog {
 		contentPane.add(textField, gbc_textField);
 		textField.setColumns(10);
 		
-		btnAtras = new JButton("ATRAS");
+		btnAtras = new JButton(MessagesIPROject.getString("VentanaEdicionProyecto.btnAtras.text")); //$NON-NLS-1$
 		btnAtras.setIcon(new ImageIcon(VentanaEdicionProyecto.class.getResource("/Resources/salir.png")));
 		GridBagConstraints gbc_btnAtras = new GridBagConstraints();
 		gbc_btnAtras.fill = GridBagConstraints.HORIZONTAL;

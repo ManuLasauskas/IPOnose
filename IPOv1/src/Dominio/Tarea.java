@@ -12,6 +12,7 @@ public class Tarea {
 	private Usuario responsable;
 	private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
 	private String descripcion;
+	private ArrayList<String> subtareas = new ArrayList<String>();
 
 	
 	public Tarea( String nombre, Date fecha_ini, Date fecha_fin, Prioridad prioridad, Estado estado, Usuario responsable, String descripcion) {
@@ -88,5 +89,11 @@ public class Tarea {
 	}
 	public String getDescripcion() {
 		return descripcion;
+	}
+	public void setSubtareas(ArrayList<String> subtareas) {
+		this.subtareas=subtareas;
+	}
+	public ArrayList<String> getSubtareas(){
+		return subtareas;
 	}
 }
