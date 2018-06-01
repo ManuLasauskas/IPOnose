@@ -345,6 +345,12 @@ public class VentanaRegistro {
 			}
 			{
 				btnSalir = new JButton(MessagesIPROject.getString("VentanaRegistro.btnSalir.text")); //$NON-NLS-1$
+				btnSalir.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						frmProjectwizardIpo.dispose();
+						VentanaInicio vx=new VentanaInicio();
+					}
+				});
 				btnSalir.addMouseListener(new BtnSalirMouseListener());
 				GridBagConstraints gbc_btnSalir = new GridBagConstraints();
 				gbc_btnSalir.gridwidth = 2;
