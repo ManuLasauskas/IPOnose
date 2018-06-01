@@ -57,7 +57,7 @@ public class Usuario {
 		for(int i=0;i<proyectos.size();i++) {
 			if(proyectos.get(i).getNombre().equals(p)) {
 				proyectos.remove(i);
-				Agente.getInstance().deleteProyecto(p);
+				//Agente.getInstance().deleteProyecto(p);
 				break;
 			}
 		}
@@ -162,7 +162,7 @@ public class Usuario {
 	
 	public void AnadirProyecto(Proyecto proyecto) {
 		this.proyectos.add(proyecto);
-		Agente.getInstance().insertProyecto(proyecto);
+		//Agente.getInstance().insertProyecto(proyecto);
 	}
 	
 	public void marcarlog() {

@@ -151,6 +151,8 @@ public class Agente {
 		end.set(2018,11,28,14,0,0);
 		p2.AnadirTarea(new Tarea("Revision modelo de comunicacion",init.getTime(),end.getTime(),Prioridad.ALTA, Estado.COMPLETADA,u2,"No hay más que hablar señoria"));
 		
+		u1.AnadirProyecto(p1);
+		u2.AnadirProyecto(p2);
 		Proyectos.add(p1);
 		Proyectos.add(p2);
 		
