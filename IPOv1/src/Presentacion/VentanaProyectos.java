@@ -298,8 +298,8 @@ public class VentanaProyectos {
 		button.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//VentanaAjustes vx = new VentanaAjustes(us);
-				//vx.setVisible(true);
+				VentanaAjustes vx = new VentanaAjustes(us);
+				vx.setVisible(true);
 			}
 		});
 		button.setIcon(new ImageIcon(VentanaProyectos.class.getResource("/Resources/ajustes.jpg")));

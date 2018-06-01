@@ -47,7 +47,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
-import com.toedter.calendar.JDateChooser;
 
 public class PanelTareas extends JPanel {
 	private JPanel panel;
@@ -64,7 +63,9 @@ public class PanelTareas extends JPanel {
 	private JLabel lblResponsable;
 	private JLabel lblBreveDescripcin;
 	private JRadioButton rdbtnActiva;
+	private JRadioButton rdbtnTardia;
 	private JLabel lblPrioridad;
+	private JSlider slider;
 	private JTextArea txtDescripcion;
 	private JLabel lblListaDeSubtareas;
 	private JList subtasklist;
@@ -81,11 +82,6 @@ public class PanelTareas extends JPanel {
 	private JButton button;
 	private JButton btnNewButton;
 	private JButton btnborrar;
-	private JRadioButton rdbtnTardia;
-	private JSlider slider;
-	private JTextField textFieldNombre;
-	private JDateChooser initdateChooser;
-	private JDateChooser enddateChooser;
 	
 
 	/**
@@ -94,9 +90,9 @@ public class PanelTareas extends JPanel {
 	public PanelTareas(Proyecto pr) {
 		this.pr=pr;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 85, 62, 103, 73, 256, 138, 161, 0};
+		gridBagLayout.columnWidths = new int[]{0, 85, 62, 103, 35, 487, 110, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 22, 22, 24, 26, 39, 90, 179, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -179,58 +175,24 @@ public class PanelTareas extends JPanel {
 		
 		panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.gridwidth = 3;
 		gbc_panel_1.gridheight = 8;
-		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 5;
 		gbc_panel_1.gridy = 1;
 		add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{1, 33, 101, 114, 64, 63, 35, 62, 0};
-		gbl_panel_1.rowHeights = new int[]{14, 14, 14, 14, 20, 23, 45, 60, 42, 153, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.columnWidths = new int[]{70, 120, 119, 70, 67, 0, 62, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 27, 33, 32, 36, 32, 69, 65, 37, 153, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
-		
-		lblEndDate = new JLabel("");
-		GridBagConstraints gbc_lblEndDate = new GridBagConstraints();
-		gbc_lblEndDate.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblEndDate.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEndDate.gridx = 0;
-		gbc_lblEndDate.gridy = 0;
-		panel_1.add(lblEndDate, gbc_lblEndDate);
-		
-		lblInitDate = new JLabel("");
-		GridBagConstraints gbc_lblInitDate = new GridBagConstraints();
-		gbc_lblInitDate.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblInitDate.insets = new Insets(0, 0, 5, 5);
-		gbc_lblInitDate.gridx = 0;
-		gbc_lblInitDate.gridy = 0;
-		panel_1.add(lblInitDate, gbc_lblInitDate);
-		
-		lblName = new JLabel("");
-		GridBagConstraints gbc_lblName = new GridBagConstraints();
-		gbc_lblName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblName.gridx = 0;
-		gbc_lblName.gridy = 0;
-		panel_1.add(lblName, gbc_lblName);
-		
-		label = new JLabel("");
-		label.setBorder(null);
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.fill = GridBagConstraints.HORIZONTAL;
-		gbc_label.insets = new Insets(0, 0, 5, 5);
-		gbc_label.gridx = 0;
-		gbc_label.gridy = 0;
-		panel_1.add(label, gbc_label);
 		
 		lblImagen = new JLabel("Imagen");
 		GridBagConstraints gbc_lblImagen = new GridBagConstraints();
 		gbc_lblImagen.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblImagen.insets = new Insets(0, 0, 5, 0);
-		gbc_lblImagen.gridx = 7;
+		gbc_lblImagen.gridx = 6;
 		gbc_lblImagen.gridy = 0;
 		panel_1.add(lblImagen, gbc_lblImagen);
 		
@@ -238,67 +200,88 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_lblNombreDeTarea = new GridBagConstraints();
 		gbc_lblNombreDeTarea.anchor = GridBagConstraints.WEST;
 		gbc_lblNombreDeTarea.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNombreDeTarea.gridx = 2;
+		gbc_lblNombreDeTarea.gridx = 1;
 		gbc_lblNombreDeTarea.gridy = 1;
 		panel_1.add(lblNombreDeTarea, gbc_lblNombreDeTarea);
 		
-		textFieldNombre = new JTextField();
-		GridBagConstraints gbc_textFieldNombre = new GridBagConstraints();
-		gbc_textFieldNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_textFieldNombre.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textFieldNombre.gridx = 3;
-		gbc_textFieldNombre.gridy = 1;
-		panel_1.add(textFieldNombre, gbc_textFieldNombre);
-		textFieldNombre.setColumns(10);
+		lblName = new JLabel("");
+		GridBagConstraints gbc_lblName = new GridBagConstraints();
+		gbc_lblName.anchor = GridBagConstraints.WEST;
+		gbc_lblName.gridwidth = 3;
+		gbc_lblName.insets = new Insets(0, 0, 5, 5);
+		gbc_lblName.gridx = 2;
+		gbc_lblName.gridy = 1;
+		panel_1.add(lblName, gbc_lblName);
+		
+		label = new JLabel("");
+		label.setBorder(null);
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.fill = GridBagConstraints.HORIZONTAL;
+		gbc_label.gridheight = 5;
+		gbc_label.insets = new Insets(0, 0, 5, 0);
+		gbc_label.gridx = 6;
+		gbc_label.gridy = 1;
+		panel_1.add(label, gbc_label);
 		
 		lblFechaDeComienzo = new JLabel("Fecha de comienzo");
 		GridBagConstraints gbc_lblFechaDeComienzo = new GridBagConstraints();
 		gbc_lblFechaDeComienzo.anchor = GridBagConstraints.WEST;
 		gbc_lblFechaDeComienzo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFechaDeComienzo.gridx = 2;
+		gbc_lblFechaDeComienzo.gridx = 1;
 		gbc_lblFechaDeComienzo.gridy = 2;
 		panel_1.add(lblFechaDeComienzo, gbc_lblFechaDeComienzo);
 		
-		initdateChooser = new JDateChooser();
-		GridBagConstraints gbc_initdateChooser = new GridBagConstraints();
-		gbc_initdateChooser.insets = new Insets(0, 0, 5, 5);
-		gbc_initdateChooser.fill = GridBagConstraints.BOTH;
-		gbc_initdateChooser.gridx = 3;
-		gbc_initdateChooser.gridy = 2;
-		panel_1.add(initdateChooser, gbc_initdateChooser);
+		lblInitDate = new JLabel("");
+		GridBagConstraints gbc_lblInitDate = new GridBagConstraints();
+		gbc_lblInitDate.anchor = GridBagConstraints.WEST;
+		gbc_lblInitDate.insets = new Insets(0, 0, 5, 5);
+		gbc_lblInitDate.gridx = 2;
+		gbc_lblInitDate.gridy = 2;
+		panel_1.add(lblInitDate, gbc_lblInitDate);
 		
 		lblFechaEstimadaDe = new JLabel("Fecha de fin");
 		GridBagConstraints gbc_lblFechaEstimadaDe = new GridBagConstraints();
 		gbc_lblFechaEstimadaDe.anchor = GridBagConstraints.WEST;
 		gbc_lblFechaEstimadaDe.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFechaEstimadaDe.gridx = 2;
+		gbc_lblFechaEstimadaDe.gridx = 1;
 		gbc_lblFechaEstimadaDe.gridy = 3;
 		panel_1.add(lblFechaEstimadaDe, gbc_lblFechaEstimadaDe);
 		
-		enddateChooser = new JDateChooser();
-		GridBagConstraints gbc_enddateChooser = new GridBagConstraints();
-		gbc_enddateChooser.insets = new Insets(0, 0, 5, 5);
-		gbc_enddateChooser.fill = GridBagConstraints.BOTH;
-		gbc_enddateChooser.gridx = 3;
-		gbc_enddateChooser.gridy = 3;
-		panel_1.add(enddateChooser, gbc_enddateChooser);
+		lblEndDate = new JLabel("");
+		GridBagConstraints gbc_lblEndDate = new GridBagConstraints();
+		gbc_lblEndDate.anchor = GridBagConstraints.WEST;
+		gbc_lblEndDate.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEndDate.gridx = 2;
+		gbc_lblEndDate.gridy = 3;
+		panel_1.add(lblEndDate, gbc_lblEndDate);
 		
 		lblResponsable = new JLabel("Responsable");
 		GridBagConstraints gbc_lblResponsable = new GridBagConstraints();
 		gbc_lblResponsable.anchor = GridBagConstraints.WEST;
 		gbc_lblResponsable.insets = new Insets(0, 0, 5, 5);
-		gbc_lblResponsable.gridx = 2;
+		gbc_lblResponsable.gridx = 1;
 		gbc_lblResponsable.gridy = 4;
 		panel_1.add(lblResponsable, gbc_lblResponsable);
 		
 		comboBox_1 = new JComboBox();
 		GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_1.gridwidth = 2;
-		gbc_comboBox_1.gridx = 3;
+		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox_1.gridx = 2;
 		gbc_comboBox_1.gridy = 4;
+		for (int i=0;i<ag.getUsuarios().size();i++) {
+			comboBox_1.addItem(ag.getUsuarios().get(i).getNombre());
+		}
 		panel_1.add(comboBox_1, gbc_comboBox_1);
+		
+		lblEstado = new JLabel("Estado");
+		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
+		gbc_lblEstado.anchor = GridBagConstraints.WEST;
+		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEstado.gridx = 1;
+		gbc_lblEstado.gridy = 5;
+		panel_1.add(lblEstado, gbc_lblEstado);
 		
 		rdbtnCompletada = new JRadioButton("COMPLETADA");
 		rdbtnCompletada.addMouseListener(new MouseAdapter() {
@@ -306,76 +289,78 @@ public class PanelTareas extends JPanel {
 			public void mouseClicked(MouseEvent arg0) {
 			}
 		});
-		
-		lblEstado = new JLabel("Estado");
-		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
-		gbc_lblEstado.anchor = GridBagConstraints.WEST;
-		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEstado.gridx = 2;
-		gbc_lblEstado.gridy = 5;
-		panel_1.add(lblEstado, gbc_lblEstado);
 		GridBagConstraints gbc_rdbtnCompletada = new GridBagConstraints();
 		gbc_rdbtnCompletada.anchor = GridBagConstraints.EAST;
 		gbc_rdbtnCompletada.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnCompletada.gridx = 3;
+		gbc_rdbtnCompletada.gridx = 2;
 		gbc_rdbtnCompletada.gridy = 5;
 		panel_1.add(rdbtnCompletada, gbc_rdbtnCompletada);
-		//group.add(rdbtnCompletada);
-		rdbtnCompletada.setSelected(true);
 		
 		rdbtnActiva = new JRadioButton("ACTIVA");
 		GridBagConstraints gbc_rdbtnActiva = new GridBagConstraints();
 		gbc_rdbtnActiva.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnActiva.gridx = 4;
+		gbc_rdbtnActiva.gridx = 3;
 		gbc_rdbtnActiva.gridy = 5;
 		panel_1.add(rdbtnActiva, gbc_rdbtnActiva);
-		//group.add(rdbtnActiva);
 		
 		rdbtnTardia = new JRadioButton("TARDIA");
 		GridBagConstraints gbc_rdbtnTardia = new GridBagConstraints();
 		gbc_rdbtnTardia.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnTardia.gridx = 5;
+		gbc_rdbtnTardia.gridx = 4;
 		gbc_rdbtnTardia.gridy = 5;
 		panel_1.add(rdbtnTardia, gbc_rdbtnTardia);
+		
+		ButtonGroup group = new ButtonGroup ();
+		group.add(rdbtnCompletada);
+		group.add(rdbtnActiva);
+		group.add(rdbtnTardia);
+		rdbtnCompletada.setSelected(true);
 		
 		
 		lblPrioridad = new JLabel("Prioridad");
 		GridBagConstraints gbc_lblPrioridad = new GridBagConstraints();
 		gbc_lblPrioridad.anchor = GridBagConstraints.WEST;
 		gbc_lblPrioridad.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPrioridad.gridx = 2;
+		gbc_lblPrioridad.gridx = 1;
 		gbc_lblPrioridad.gridy = 6;
 		panel_1.add(lblPrioridad, gbc_lblPrioridad);
+	    Dictionary labels = new Hashtable();
+        labels.put(0, new JLabel("Baja"));
+        labels.put(1, new JLabel("Moderada"));
+        labels.put(2, new JLabel("Urgente"));
 		
 		slider = new JSlider();
-		slider.setValue(0);
-		slider.setPaintTicks(true);
+		slider.setLabelTable(labels);
 		slider.setPaintLabels(true);
-		slider.setMinorTickSpacing(1);
-		slider.setMaximum(2);
+		slider.setPaintTicks(true);
 		slider.setMajorTickSpacing(1);
+		slider.setMinorTickSpacing(1);
+		slider.setValue(0);
+		slider.setMaximum(2);
 		GridBagConstraints gbc_slider = new GridBagConstraints();
-		gbc_slider.fill = GridBagConstraints.HORIZONTAL;
+		gbc_slider.gridwidth = 3;
 		gbc_slider.insets = new Insets(0, 0, 5, 5);
-		gbc_slider.gridx = 3;
+		gbc_slider.gridx = 2;
 		gbc_slider.gridy = 6;
+		
+
 		panel_1.add(slider, gbc_slider);
 		
 		lblBreveDescripcin = new JLabel("Breve descripción");
 		GridBagConstraints gbc_lblBreveDescripcin = new GridBagConstraints();
 		gbc_lblBreveDescripcin.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblBreveDescripcin.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBreveDescripcin.gridx = 2;
+		gbc_lblBreveDescripcin.gridx = 1;
 		gbc_lblBreveDescripcin.gridy = 7;
 		panel_1.add(lblBreveDescripcin, gbc_lblBreveDescripcin);
 		
 		txtDescripcion = new JTextArea();
 		txtDescripcion.setEditable(false);
 		GridBagConstraints gbc_txtDescripcion = new GridBagConstraints();
-		gbc_txtDescripcion.fill = GridBagConstraints.BOTH;
 		gbc_txtDescripcion.insets = new Insets(0, 0, 5, 5);
 		gbc_txtDescripcion.gridwidth = 3;
-		gbc_txtDescripcion.gridx = 3;
+		gbc_txtDescripcion.fill = GridBagConstraints.BOTH;
+		gbc_txtDescripcion.gridx = 2;
 		gbc_txtDescripcion.gridy = 7;
 		panel_1.add(txtDescripcion, gbc_txtDescripcion);
 		
@@ -383,27 +368,18 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_lblListaDeSubtareas = new GridBagConstraints();
 		gbc_lblListaDeSubtareas.anchor = GridBagConstraints.NORTH;
 		gbc_lblListaDeSubtareas.insets = new Insets(0, 0, 0, 5);
-		gbc_lblListaDeSubtareas.gridx = 2;
+		gbc_lblListaDeSubtareas.gridx = 1;
 		gbc_lblListaDeSubtareas.gridy = 9;
 		panel_1.add(lblListaDeSubtareas, gbc_lblListaDeSubtareas);
 		
 		subtasklist = new JList();
 		GridBagConstraints gbc_subtasklist = new GridBagConstraints();
-		gbc_subtasklist.fill = GridBagConstraints.BOTH;
 		gbc_subtasklist.insets = new Insets(0, 0, 0, 5);
 		gbc_subtasklist.gridwidth = 3;
-		gbc_subtasklist.gridx = 3;
+		gbc_subtasklist.fill = GridBagConstraints.BOTH;
+		gbc_subtasklist.gridx = 2;
 		gbc_subtasklist.gridy = 9;
 		panel_1.add(subtasklist, gbc_subtasklist);
-		for (int i=0;i<ag.getUsuarios().size();i++) {
-			comboBox_1.addItem(ag.getUsuarios().get(i).getNombre());
-		}
-		
-		ButtonGroup group = new ButtonGroup ();
-	    Dictionary labels = new Hashtable();
-        labels.put(0, new JLabel("Baja"));
-        labels.put(1, new JLabel("Moderada"));
-        labels.put(2, new JLabel("Urgente"));
 		
 		button = new JButton("");
 		button.addMouseListener(new MouseAdapter() {
