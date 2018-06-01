@@ -40,7 +40,6 @@ public class Usuario {
 		this.apellido=apellido;
 		this.RegistroChats=new ArrayList<RegistroChats>();
 		Img=ImgRoute;
-		ag=Agente.getInstance();
 	}	
 	public String getUsuario() {
 		return usuario;
@@ -58,7 +57,7 @@ public class Usuario {
 		for(int i=0;i<proyectos.size();i++) {
 			if(proyectos.get(i).getNombre().equals(p)) {
 				proyectos.remove(i);
-				ag.deleteProyecto(p);
+				Agente.getInstance().deleteProyecto(p);
 				break;
 			}
 		}
@@ -163,7 +162,7 @@ public class Usuario {
 	
 	public void AnadirProyecto(Proyecto proyecto) {
 		this.proyectos.add(proyecto);
-		ag.insertProyecto(proyecto);
+		Agente.getInstance().insertProyecto(proyecto);
 	}
 	
 	public void marcarlog() {
