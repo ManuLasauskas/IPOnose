@@ -39,6 +39,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaEdicionProyecto extends JDialog {
 
@@ -72,6 +74,7 @@ public class VentanaEdicionProyecto extends JDialog {
 		this.parent=parent;
 		iniciar();
 		this.p=p;
+		this.creador=p.getUsuario();
 		rellenarCampos();
 		
 	}
@@ -201,14 +204,20 @@ public class VentanaEdicionProyecto extends JDialog {
 		contentPane.add(btnAtras, gbc_btnAtras);
 		
 		btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if (p!=null) actualizarProyecto();
-				else {
-					ag.getProyectos().add(new Proyecto (txtNombre.getText(), creador, dtInicio.getDate(),dtFin.getDate(),(Estado) comboBox.getSelectedItem(),textField.getText()));
-					dispose();
+				if (p!=null) {
+					if(ComprobarFechas()) actualizarProyecto();
+				}else{
+					if(ComprobarFechas()) creador.AnadirProyecto(new Proyecto (txtNombre.getText(), creador, dtInicio.getDate(),dtFin.getDate(),(Estado) comboBox.getSelectedItem(),textField.getText()));
+					
 				}
+				dispose();
 			}
 			});
 		
@@ -236,8 +245,17 @@ public class VentanaEdicionProyecto extends JDialog {
 		p.setFechaCreacion(dtInicio.getDate());
 		p.setFechaFin(dtFin.getDate());
 		p.setDescripcion(textField.getText());
-		ag.getProyectos().add(p);
+		
 		this.dispose();
+	}
+	
+	public boolean ComprobarFechas() {
+		
+		if(dtInicio.getDate().compareTo(dtFin.getDate())<=0) return true;
+		
+		return false;
+			
+		
 	}
 }
 		

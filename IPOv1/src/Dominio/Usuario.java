@@ -9,6 +9,8 @@ import java.util.*;
 
 import javax.swing.ImageIcon;
 
+import Persistencia.Agente;
+
 public class Usuario {
 
 	private String usuario;
@@ -23,6 +25,7 @@ public class Usuario {
 	private ArrayList<RegistroChats> RegistroChats;
 	private ArrayList<Proyecto> proyectos;
 	private DateFormat fm= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	private Agente ag;
 
 	
 	public Usuario(String usuario, String rol, String contrasena, String email, String descripcion, String nombre, String apellido,Image ImgRoute) {
@@ -37,6 +40,7 @@ public class Usuario {
 		this.apellido=apellido;
 		this.RegistroChats=new ArrayList<RegistroChats>();
 		Img=ImgRoute;
+		ag=Agente.getInstance();
 	}	
 	public String getUsuario() {
 		return usuario;
@@ -48,6 +52,16 @@ public class Usuario {
 	
 	public void setImage(Image Image) {
 		Img=Image;
+	}
+
+	public void EliminarProyecto(String p) {
+		for(int i=0;i<proyectos.size();i++) {
+			if(proyectos.get(i).getNombre().equals(p)) {
+				proyectos.remove(i);
+				ag.deleteProyecto(p);
+				break;
+			}
+		}
 	}
 	
 	public void InicializarRegistro(ArrayList<Usuario> usuarios) {
@@ -149,6 +163,7 @@ public class Usuario {
 	
 	public void AnadirProyecto(Proyecto proyecto) {
 		this.proyectos.add(proyecto);
+		ag.insertProyecto(proyecto);
 	}
 	
 	public void marcarlog() {

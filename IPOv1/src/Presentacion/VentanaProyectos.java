@@ -173,6 +173,10 @@ public class VentanaProyectos {
 		frmIproyect.getContentPane().add(lblMisProyectos, gbc_lblMisProyectos);
 		
 		JButton btnadd = new JButton(""); //$NON-NLS-1$
+		btnadd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnadd.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -190,11 +194,18 @@ public class VentanaProyectos {
 		frmIproyect.getContentPane().add(btnadd, gbc_btnadd);
 		
 		btnedit = new JButton(""); //$NON-NLS-1$
+		btnedit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnedit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				cargarDialogoProyecto(seleccion);	
-				proyectos.removeElement(seleccion.getNombre());
+				if(!list.isSelectionEmpty()) {
+					seleccion=ag.BuscarProyecto(list.getSelectedValue().toString());
+					cargarDialogoProyecto(seleccion);
+					darLista();
+				}
 			}
 		});
 		btnedit.setIcon(new ImageIcon(VentanaProyectos.class.getResource("/Resources/lapiz.png"))); //$NON-NLS-1$
@@ -207,12 +218,21 @@ public class VentanaProyectos {
 		frmIproyect.getContentPane().add(btnedit, gbc_btnedit);
 		
 		JButton btndelete = new JButton(""); //$NON-NLS-1$
+		btndelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btndelete.setEnabled(false);
 		btndelete.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				proyectos.removeElement(seleccion.getNombre());
-				ag.getProyectos().remove(seleccion);
+				if(!list.isSelectionEmpty()) {
+					list.remove(list.getSelectedIndex());
+					proyectos.removeElement(seleccion.getNombre());
+					us.EliminarProyecto(seleccion.getNombre());
+				}
+
+				
 				}
 		});
 		btndelete.setIcon(new ImageIcon(VentanaProyectos.class.getResource("/Resources/papelera.png"))); //$NON-NLS-1$
@@ -266,14 +286,14 @@ public class VentanaProyectos {
 				if (list.getSelectedValue() != null) {
 					btnedit.setEnabled(true);
 					btndelete.setEnabled(true);
+					seleccion=ag.BuscarProyecto(p);
+
 				}
-				for (int j=0;j<ag.getProyectos().size();j++) {
-					if (String.valueOf(ag.getProyectos().get(j).getNombre()).equals(p)) seleccion=ag.getProyectos().get(j);
-				}
+				
 				if (seleccion!=null) panel.fill(seleccion);
-				tareas_panel.setEnabled(true);
-				tareas_panel.eliminarTareas();
-				tareas_panel.mostrarTareas(seleccion);
+					tareas_panel.setEnabled(true);
+					tareas_panel.eliminarTareas();
+					tareas_panel.mostrarTareas(seleccion);
 
 			}
 		});
@@ -362,8 +382,8 @@ public class VentanaProyectos {
 	}
 	public void darLista() {
 		proyectos.clear();
-		for ( int i = 0; i < ag.getProyectos().size(); i++ ){
-			if (ag.getProyectos().get(i).getUsuario()==us) proyectos.addElement(ag.getProyectos().get(i).getNombre() );
+		for ( int i = 0; i < us.getproyectos().size(); i++ ){
+			proyectos.addElement(us.getproyectos().get(i).getNombre());
 		}
 		
 	}
