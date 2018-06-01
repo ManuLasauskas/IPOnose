@@ -44,6 +44,9 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class PanelTareas extends JPanel {
 	private JPanel panel;
@@ -74,6 +77,7 @@ public class PanelTareas extends JPanel {
 	private JComboBox comboBox_1;
 	private DefaultListModel<String> tareas;
 	private Agente ag = Agente.getInstance();
+	private Proyecto pr;
 	private ArrayList<Tarea> tareas_proyecto;
 	private JButton button;
 	private JButton btnNewButton;
@@ -83,11 +87,12 @@ public class PanelTareas extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelTareas() {
+	public PanelTareas(Proyecto pr) {
+		this.pr=pr;
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 85, 62, 103, 35, 0, 0};
+		gridBagLayout.columnWidths = new int[]{0, 85, 62, 103, 35, 487, 110, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 22, 22, 24, 26, 39, 90, 179, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -171,22 +176,23 @@ public class PanelTareas extends JPanel {
 		panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.gridheight = 8;
-		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 5;
 		gbc_panel_1.gridy = 1;
 		add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{121, 119, 70, 67, 0, 142, 0};
-		gbl_panel_1.rowHeights = new int[]{0, 27, 33, 32, 36, 32, 69, 65, 37, 118, 0};
-		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.columnWidths = new int[]{70, 120, 119, 70, 67, 0, 62, 0};
+		gbl_panel_1.rowHeights = new int[]{0, 27, 33, 32, 36, 32, 69, 65, 37, 153, 0};
+		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
 		lblImagen = new JLabel("Imagen");
 		GridBagConstraints gbc_lblImagen = new GridBagConstraints();
+		gbc_lblImagen.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblImagen.insets = new Insets(0, 0, 5, 0);
-		gbc_lblImagen.gridx = 5;
+		gbc_lblImagen.gridx = 6;
 		gbc_lblImagen.gridy = 0;
 		panel_1.add(lblImagen, gbc_lblImagen);
 		
@@ -194,7 +200,7 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_lblNombreDeTarea = new GridBagConstraints();
 		gbc_lblNombreDeTarea.anchor = GridBagConstraints.WEST;
 		gbc_lblNombreDeTarea.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNombreDeTarea.gridx = 0;
+		gbc_lblNombreDeTarea.gridx = 1;
 		gbc_lblNombreDeTarea.gridy = 1;
 		panel_1.add(lblNombreDeTarea, gbc_lblNombreDeTarea);
 		
@@ -203,17 +209,17 @@ public class PanelTareas extends JPanel {
 		gbc_lblName.anchor = GridBagConstraints.WEST;
 		gbc_lblName.gridwidth = 3;
 		gbc_lblName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblName.gridx = 1;
+		gbc_lblName.gridx = 2;
 		gbc_lblName.gridy = 1;
 		panel_1.add(lblName, gbc_lblName);
 		
 		label = new JLabel("");
 		label.setBorder(null);
 		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.anchor = GridBagConstraints.WEST;
+		gbc_label.fill = GridBagConstraints.HORIZONTAL;
 		gbc_label.gridheight = 5;
 		gbc_label.insets = new Insets(0, 0, 5, 0);
-		gbc_label.gridx = 5;
+		gbc_label.gridx = 6;
 		gbc_label.gridy = 1;
 		panel_1.add(label, gbc_label);
 		
@@ -221,7 +227,7 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_lblFechaDeComienzo = new GridBagConstraints();
 		gbc_lblFechaDeComienzo.anchor = GridBagConstraints.WEST;
 		gbc_lblFechaDeComienzo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFechaDeComienzo.gridx = 0;
+		gbc_lblFechaDeComienzo.gridx = 1;
 		gbc_lblFechaDeComienzo.gridy = 2;
 		panel_1.add(lblFechaDeComienzo, gbc_lblFechaDeComienzo);
 		
@@ -229,7 +235,7 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_lblInitDate = new GridBagConstraints();
 		gbc_lblInitDate.anchor = GridBagConstraints.WEST;
 		gbc_lblInitDate.insets = new Insets(0, 0, 5, 5);
-		gbc_lblInitDate.gridx = 1;
+		gbc_lblInitDate.gridx = 2;
 		gbc_lblInitDate.gridy = 2;
 		panel_1.add(lblInitDate, gbc_lblInitDate);
 		
@@ -237,7 +243,7 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_lblFechaEstimadaDe = new GridBagConstraints();
 		gbc_lblFechaEstimadaDe.anchor = GridBagConstraints.WEST;
 		gbc_lblFechaEstimadaDe.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFechaEstimadaDe.gridx = 0;
+		gbc_lblFechaEstimadaDe.gridx = 1;
 		gbc_lblFechaEstimadaDe.gridy = 3;
 		panel_1.add(lblFechaEstimadaDe, gbc_lblFechaEstimadaDe);
 		
@@ -245,7 +251,7 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_lblEndDate = new GridBagConstraints();
 		gbc_lblEndDate.anchor = GridBagConstraints.WEST;
 		gbc_lblEndDate.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEndDate.gridx = 1;
+		gbc_lblEndDate.gridx = 2;
 		gbc_lblEndDate.gridy = 3;
 		panel_1.add(lblEndDate, gbc_lblEndDate);
 		
@@ -253,7 +259,7 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_lblResponsable = new GridBagConstraints();
 		gbc_lblResponsable.anchor = GridBagConstraints.WEST;
 		gbc_lblResponsable.insets = new Insets(0, 0, 5, 5);
-		gbc_lblResponsable.gridx = 0;
+		gbc_lblResponsable.gridx = 1;
 		gbc_lblResponsable.gridy = 4;
 		panel_1.add(lblResponsable, gbc_lblResponsable);
 		
@@ -262,7 +268,7 @@ public class PanelTareas extends JPanel {
 		gbc_comboBox_1.gridwidth = 2;
 		gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_1.gridx = 1;
+		gbc_comboBox_1.gridx = 2;
 		gbc_comboBox_1.gridy = 4;
 		for (int i=0;i<ag.getUsuarios().size();i++) {
 			comboBox_1.addItem(ag.getUsuarios().get(i).getNombre());
@@ -273,7 +279,7 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
 		gbc_lblEstado.anchor = GridBagConstraints.WEST;
 		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEstado.gridx = 0;
+		gbc_lblEstado.gridx = 1;
 		gbc_lblEstado.gridy = 5;
 		panel_1.add(lblEstado, gbc_lblEstado);
 		
@@ -286,22 +292,21 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_rdbtnCompletada = new GridBagConstraints();
 		gbc_rdbtnCompletada.anchor = GridBagConstraints.EAST;
 		gbc_rdbtnCompletada.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnCompletada.gridx = 1;
+		gbc_rdbtnCompletada.gridx = 2;
 		gbc_rdbtnCompletada.gridy = 5;
 		panel_1.add(rdbtnCompletada, gbc_rdbtnCompletada);
 		
 		rdbtnActiva = new JRadioButton("ACTIVA");
 		GridBagConstraints gbc_rdbtnActiva = new GridBagConstraints();
-		gbc_rdbtnActiva.anchor = GridBagConstraints.WEST;
 		gbc_rdbtnActiva.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnActiva.gridx = 2;
+		gbc_rdbtnActiva.gridx = 3;
 		gbc_rdbtnActiva.gridy = 5;
 		panel_1.add(rdbtnActiva, gbc_rdbtnActiva);
 		
 		rdbtnTardia = new JRadioButton("TARDIA");
 		GridBagConstraints gbc_rdbtnTardia = new GridBagConstraints();
 		gbc_rdbtnTardia.insets = new Insets(0, 0, 5, 5);
-		gbc_rdbtnTardia.gridx = 3;
+		gbc_rdbtnTardia.gridx = 4;
 		gbc_rdbtnTardia.gridy = 5;
 		panel_1.add(rdbtnTardia, gbc_rdbtnTardia);
 		
@@ -316,7 +321,7 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_lblPrioridad = new GridBagConstraints();
 		gbc_lblPrioridad.anchor = GridBagConstraints.WEST;
 		gbc_lblPrioridad.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPrioridad.gridx = 0;
+		gbc_lblPrioridad.gridx = 1;
 		gbc_lblPrioridad.gridy = 6;
 		panel_1.add(lblPrioridad, gbc_lblPrioridad);
 	    Dictionary labels = new Hashtable();
@@ -335,7 +340,7 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_slider = new GridBagConstraints();
 		gbc_slider.gridwidth = 3;
 		gbc_slider.insets = new Insets(0, 0, 5, 5);
-		gbc_slider.gridx = 1;
+		gbc_slider.gridx = 2;
 		gbc_slider.gridy = 6;
 		
 
@@ -345,7 +350,7 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_lblBreveDescripcin = new GridBagConstraints();
 		gbc_lblBreveDescripcin.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblBreveDescripcin.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBreveDescripcin.gridx = 0;
+		gbc_lblBreveDescripcin.gridx = 1;
 		gbc_lblBreveDescripcin.gridy = 7;
 		panel_1.add(lblBreveDescripcin, gbc_lblBreveDescripcin);
 		
@@ -355,7 +360,7 @@ public class PanelTareas extends JPanel {
 		gbc_txtDescripcion.insets = new Insets(0, 0, 5, 5);
 		gbc_txtDescripcion.gridwidth = 3;
 		gbc_txtDescripcion.fill = GridBagConstraints.BOTH;
-		gbc_txtDescripcion.gridx = 1;
+		gbc_txtDescripcion.gridx = 2;
 		gbc_txtDescripcion.gridy = 7;
 		panel_1.add(txtDescripcion, gbc_txtDescripcion);
 		
@@ -363,7 +368,7 @@ public class PanelTareas extends JPanel {
 		GridBagConstraints gbc_lblListaDeSubtareas = new GridBagConstraints();
 		gbc_lblListaDeSubtareas.anchor = GridBagConstraints.NORTH;
 		gbc_lblListaDeSubtareas.insets = new Insets(0, 0, 0, 5);
-		gbc_lblListaDeSubtareas.gridx = 0;
+		gbc_lblListaDeSubtareas.gridx = 1;
 		gbc_lblListaDeSubtareas.gridy = 9;
 		panel_1.add(lblListaDeSubtareas, gbc_lblListaDeSubtareas);
 		
@@ -372,7 +377,7 @@ public class PanelTareas extends JPanel {
 		gbc_subtasklist.insets = new Insets(0, 0, 0, 5);
 		gbc_subtasklist.gridwidth = 3;
 		gbc_subtasklist.fill = GridBagConstraints.BOTH;
-		gbc_subtasklist.gridx = 1;
+		gbc_subtasklist.gridx = 2;
 		gbc_subtasklist.gridy = 9;
 		panel_1.add(subtasklist, gbc_subtasklist);
 		
@@ -393,6 +398,15 @@ public class PanelTareas extends JPanel {
 		add(button, gbc_button);
 		
 		btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(tasklist.getSelectedValue()!=null) {
+					Tarea t;
+					t=pr.BuscarTarea(tasklist.getSelectedValue());
+					//t.Update();
+				}
+			}
+		});
 		btnNewButton.setIcon(new ImageIcon(PanelTareas.class.getResource("/Resources/lapiz.png")));
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override

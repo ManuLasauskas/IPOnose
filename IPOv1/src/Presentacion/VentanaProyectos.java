@@ -57,10 +57,12 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
 
 public class VentanaProyectos {
 
@@ -110,7 +112,6 @@ public class VentanaProyectos {
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frmIproyect.getContentPane().setLayout(gridBagLayout);
-		
 		
 		JLabel lblImage = new JLabel("");
 		GridBagConstraints gbc_lblImage = new GridBagConstraints();
@@ -237,8 +238,7 @@ public class VentanaProyectos {
 		
 		InfoProyecto panel = new InfoProyecto();
 		display_tab.addTab("Información", null, panel, null);
-		
-		PanelTareas tareas_panel = new PanelTareas();
+		PanelTareas tareas_panel = new PanelTareas(seleccion);
 		tareas_panel.setEnabled(false);
 		display_tab.addTab("Tareas", null, tareas_panel, null);
 		
@@ -276,6 +276,7 @@ public class VentanaProyectos {
 				tareas_panel.setEnabled(true);
 				tareas_panel.eliminarTareas();
 				tareas_panel.mostrarTareas(seleccion);
+
 			}
 		});
 		

@@ -46,6 +46,7 @@ public class Agente {
     //Metodo para realizar una insercion en la base de datos
     public int insertUsuario(Usuario usuario){ 
     	Usuarios.add(usuario);
+    	usuario.InicializarRegistro(Usuarios);
     	return 1;
     }
     
@@ -130,7 +131,7 @@ public class Agente {
 		
 		init.set(2017,10,2,9,0,0);
 		end.set(2017,12,28,15,0,0);
-		p1.AnadirTarea(new Tarea("Integracion en dispositivos",init.getTime(),end.getTime(),Prioridad.MODERADA, Estado.ACTIVA,u2,"Proceso de integrar el nuevo prototipo funcional dentro de dispositivos portatiles"));
+		p1.AnadirTarea(new Tarea("Integracion en dispositivos",init.getTime(),end.getTime(),Prioridad.MODERADA, Estado.ACTIVA,u2,"Proceso de integrar el nuevo prototipo funcional"));
 		
 		init.set(2018, 4,3,13,30,0);
 		end.set(2020, 11,13,16,45,0);
@@ -144,7 +145,7 @@ public class Agente {
 		
 		init.set(2018,6,2,9,0,0);
 		end.set(2018,9,28,14,0,0);
-		p2.AnadirTarea(new Tarea("Diseño nuevo firewall",init.getTime(),end.getTime(),Prioridad.MODERADA, Estado.ACTIVA,u1,"Construcción del nuevo firewall especializado en ladrones de diamantes"));
+		p2.AnadirTarea(new Tarea("Diseño nuevo firewall",init.getTime(),end.getTime(),Prioridad.MODERADA, Estado.ACTIVA,u1,"Construcción del nuevo firewall"));
 		
 		init.set(2018,9,2,9,0,0);
 		end.set(2018,11,28,14,0,0);

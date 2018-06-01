@@ -23,6 +23,16 @@ public class Tarea {
 		this.responsable=responsable;
 		this.descripcion=descripcion;
 	}
+	
+	public void Update( String nombre, Date fecha_ini, Date fecha_fin, Prioridad prioridad, Estado estado, Usuario responsable, String descripcion) {
+		this.nombre = nombre;
+		this.fecha_ini = fecha_ini;
+		this.fecha_fin = fecha_fin;
+		this.prioridad = prioridad;
+		this.estado=estado;
+		this.responsable=responsable;
+		this.descripcion=descripcion;
+	}
 
 	public String getNombre() {
 		return nombre;
